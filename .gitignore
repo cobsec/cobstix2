@@ -243,3 +243,4 @@ ModelManifest.xml
 
 *.sln
 cobstix2.pyproj
+/cobstix2.pyc

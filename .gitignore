@@ -242,4 +242,4 @@ ModelManifest.xml
 .fake/
 
 *.sln
-*.pyproj
+cobstix2.pyproj

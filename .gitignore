@@ -244,3 +244,7 @@ ModelManifest.xml
 *.sln
 cobstix2.pyproj
 /cobstix2.pyc
+/test.csv
+/JAR-16-20296A.csv
+/out.json
+/grizzlysteppe.py

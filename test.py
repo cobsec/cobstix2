@@ -2,11 +2,13 @@ from cobstix2 import *
 
 def main():
 
+  #set_default_tlp('white')
   ind = Indicator()
+  created_by = ind.set_created_by_ref('chriso', 'individual')
   ind.set_labels(['malicious-activity'])
   ind.set_text('Derp Malware', 'This file is part of Derp')
-  ind.set_pattern("file-object.hashes.md5 = '3773a88f65a5e780c8dff9dcd3a056f3'", 'cybox')
-  #tlp_red = ind.set_tlp('red')
+  ind.set_pattern("file-object.hashes.md5 = '3773a88f65a5e780c8dff9dcd3a056f3'", 'cybox')  
+  tlp_red = ind.set_tlp('red', ['description', 'title'])
 
   ind2 = Indicator()
   ind2.set_labels(['malicious-activity'])
@@ -26,12 +28,16 @@ def main():
   cam.set_aliases(['test', 'another'])
 
   all_sdo = get_all_SDO()
-  bun = bundle(*all_sdo)
-
+  obj_refs = []
+  for obj in all_sdo:
+    obj_refs.append(obj.id)
   rep = Report()
-  rep.set_object_refs(['marking-definition--597429af-b1a6-396e-a73b-a6adad0461a4', 'indicator--e8bd96f5-8bf4-4e41-9d59-3af6797821b3'])
+  rep.set_object_refs(obj_refs)
 
-  print mal
+  #bun = bundle(*all_sdo)
+
+ 
+  print all_sdo
 
   #print bun
   """

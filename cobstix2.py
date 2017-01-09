@@ -39,13 +39,15 @@ BUNDLE_PROPERTIES = {
 
 class SDO(object):
   def __init__(self, *args, **kwargs):
-    self.created_by_ref = kwargs.get('created_by_ref', ns_uuid('identity', USER))
     self.created = kwargs.get('created', datetime.datetime.utcnow().isoformat('T') + 'Z')
     self.modified = kwargs.get('modified', self.created)
     self.version = kwargs.get('version', '1')
     self.id = kwargs.get('id', uuid(self.type))
+    self.created_by_ref = kwargs.get('created_by_ref', ns_uuid('identity', USER))
     if 'labels' in kwargs:
-      self.labels = kwargs.get('labels')
+      self.set_labels(kwargs.get('labels'))
+    if 'name' in kwargs or 'description' in kwargs:
+      self.set_text(kwargs.get('name', None), kwargs.get('description', None))
 
   def set_text(self, name, description=None):
     self.name = name
@@ -59,18 +61,31 @@ class SDO(object):
       self.labels = labels
 
   def set_tlp(self, definition, selectors=None):
+    try:
+      del self.object_marking_refs
+    except AttributeError:
+      pass
+    try:
+      del self.granular_markings
+    except AttributeError:
+      pass
     tlp_id = ns_uuid('marking-definition', definition)
-    _tlp = query_by_ref('elk', tlp_id)
+    _tlp = query_by_ref('local', tlp_id)
     if _tlp is False:
-      _tlp = TLPMarking(definition=definition)
-    if not selectors:
+      _tlp = TLPMarking(definition=definition, id=tlp_id)
+    if selectors is None:
       self.object_marking_refs = [tlp_id]
     else:
-      try:
-        self.granular_markings.append({'marking_ref': tlp_id, 'selectors': selectors})
-      except AttributeError:
-        self.granular_markings = [{'marking_ref': tlp_id, 'selectors': selectors}]
-    return _tlp  
+      self.granular_markings = [{'marking_ref': tlp_id, 'selectors': selectors}]
+    return _tlp
+
+  def set_created_by_ref(self, name, identity_class):
+    id_ref = ns_uuid('identity', name)
+    _identity = query_by_ref('local', id_ref)
+    if _identity is False:
+      _identity = Identity(name=name, identity_class=identity_class, id=id_ref)
+    self.created_by_ref = _identity.id
+    return _identity
 
   def __repr__(self):
     return json.dumps(self.__dict__, sort_keys=True, indent=4, separators=(',', ': '))
@@ -88,11 +103,13 @@ class Campaign(SDO):
     else:
       self.aliases.append(aliases)
 
-  def set_first_seen(self, first_seen=None):
+  def set_first_seen(self, first_seen=None, precision=None):
     if first_seen is None:
       self.first_seen = self.created
     else:
       self.first_seen = first_seen
+      if precision is not None:
+        self.first_seen_precision = precision
 
   def set_objective(self, objective=None):
     self.objective = objective
@@ -102,6 +119,14 @@ class CourseOfAction(SDO):
   def __init__(self, *args, **kwargs):
     self.type = CourseOfAction.type
     super(CourseOfAction, self).__init__(*args, **kwargs)
+
+class Identity(SDO):
+  type = 'identity'
+  def __init__(self, *args, **kwargs):
+    self.type = Identity.type
+    super(Identity, self).__init__(*args, **kwargs)
+    self.identity_class = kwargs.get('identity_class')
+    
 
 class Indicator(SDO):
   type = 'indicator'
@@ -176,7 +201,6 @@ class Tool(SDO):
     self.tool_version = tool_version
 
 class Relationship(SDO):
-
   type = 'relationship'
   def __init__(self, *args, **kwargs):
     self.type = Relationship.type
@@ -200,17 +224,13 @@ class Relationship(SDO):
     self.description = description
 
 class DataMarking(SDO):
-
   type = 'marking-definition'
-
   def __init__(self, *args, **kwargs):
     self.type = DataMarking.type
     super(DataMarking, self).__init__(*args, **kwargs)
 
 class TLPMarking(DataMarking):
-
   definition_type = 'tlp'
-
   def __init__(self, *args, **kwargs):
     self.definition_type = TLPMarking.definition_type
     super(TLPMarking, self).__init__(*args, **kwargs)
@@ -277,7 +297,7 @@ def query_by_ref(query_type, _id):
     try:
       new_obj = dict_to_obj(json_content["_source"])
       return new_obj
-    except AttributeError:
+    except KeyError:
       return False
   else:
     return False

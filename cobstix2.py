@@ -9,8 +9,8 @@ import requests
 import inspect
 
 #Default values
-USER = 'default'
-ELK = 'http://192.168.137.141:9200/'
+USER = 'cobsec'
+ELK = 'http://192.168.137.144:9200/'
 
 def ns_uuid(_type, _string):
   return str(_type) + '--' + str(uuid3(NAMESPACE_URL, _string))
@@ -70,7 +70,7 @@ class SDO(object):
     except AttributeError:
       pass
     tlp_id = ns_uuid('marking-definition', definition)
-    _tlp = query_by_ref('local', tlp_id)
+    _tlp = query_by_ref('elk', tlp_id)
     if _tlp is False:
       _tlp = TLPMarking(definition=definition, id=tlp_id)
     if selectors is None:
@@ -81,7 +81,7 @@ class SDO(object):
 
   def set_created_by_ref(self, name, identity_class):
     id_ref = ns_uuid('identity', name)
-    _identity = query_by_ref('local', id_ref)
+    _identity = query_by_ref('elk', id_ref)
     if _identity is False:
       _identity = Identity(name=name, identity_class=identity_class, id=id_ref)
     self.created_by_ref = _identity.id
@@ -134,6 +134,10 @@ class Indicator(SDO):
     self.type = Indicator.type
     super(Indicator, self).__init__(*args, **kwargs)
     self.valid_from = kwargs.get('valid_from', self.created)
+    if 'pattern' in kwargs:
+      self.set_pattern(kwargs.get('pattern'), kwargs.get('pattern_lang', None), kwargs.get('pattern_lang_version', None))
+    if 'valid_until' in kwargs:
+      self.set_valid_until(kwargs.get('valid_until'))
     
   def set_pattern(self, pattern, pattern_lang=None, pattern_lang_version=None):
     self.pattern = pattern
@@ -223,6 +227,16 @@ class Relationship(SDO):
   def set_text(self, description):
     self.description = description
 
+class Sighting(SDO):
+  type = 'sighting'
+  def __init__(self, *args, **kwargs):
+    self.type = Sighting.type
+    super(Sighting, self).__init__(*args, **kwargs)
+    if 'sighting_of_ref' in kwargs:
+      self.sighting_of_ref = kwargs.get('sighting_of_ref')
+    else:
+      self.sighting_of_ref = args[0]
+
 class DataMarking(SDO):
   type = 'marking-definition'
   def __init__(self, *args, **kwargs):
@@ -302,13 +316,34 @@ def query_by_ref(query_type, _id):
   else:
     return False
 
+def query_by_indicator(query_type, value):
+  if query_type == 'elk':
+    _index = 'cobsec'
+    _type = 'indicator'
+    endpoint = ELK + '%s/%s/_search' % (_index, _type)
+    payload = '{"query":{"query_string":{"query": "%s"}}}' % value
+    r = requests.post(endpoint, payload)
+    json_content = r.json()
+    try:
+      hit_list = json_content['hits']['hits']
+      obj_list = []
+      for hit in hit_list:
+        new_obj = dict_to_obj(hit["_source"])
+        obj_list.append(new_obj)
+      return obj_list
+    except KeyError:
+      return False
+    return json_content
+  else:
+    return False
+
 def put_elk(*_payloads):
   results = []
-  print _payloads
+  #print _payloads
   for _payload in _payloads:
-    print _payload
+    #print _payload
     if isinstance(_payload, SDO) or isinstance(_payload, Bundle):
-      _index = USER
+      _index = 'cobsec'
       _type = _payload.type
       _id = _payload.id.split('--')[1]
     else:

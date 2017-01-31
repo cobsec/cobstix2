@@ -2,6 +2,10 @@ from cobstix2 import *
 
 def main():
 
+  ident = Identity(name='ferwg', identity_class='something')
+  
+
+  ident.set_sectors('entertainment')
   ind = Indicator(labels=['malicious-activity'], pattern="file-object.hashes.md5 = '3773a88f65a5e780c8dff9dcd3a056f3'")
   #tlp_red = ind.set_tlp('red', ['description', 'title'])
 
@@ -13,6 +17,9 @@ def main():
   rel = Relationship('indicates', ind.id, mal.id)
   rel.set_text('something in desc')
 
+  cam = Campaign(name='A Campaign Name')
+  cam.set_aliases(['test', 'another'])
+
   all_sdo = get_all_SDO()
 
   """
@@ -22,16 +29,14 @@ def main():
   rep = Report()
   rep.set_object_refs(obj_refs)
   """
-  
-  #print all_sdo
+
   bun = Bundle(objects=all_sdo)
   print bun
 
-  cam = Campaign()
-  cam.set_aliases(['test', 'another'])
+  
 
-  bun.add_object(cam)
-  print bun
+  #bun.add_object(cam)
+  #print bun
 
   """
   response = query('marking-definition--597429af-b1a6-396e-a73b-a6adad0461a4')

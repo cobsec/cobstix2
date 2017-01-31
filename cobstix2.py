@@ -7,6 +7,7 @@ from pprint import pprint
 import gc
 import requests
 import inspect
+import re
 
 from vocab import *
 from config import settings
@@ -19,6 +20,9 @@ def ns_uuid(_type, _string):
 
 def uuid(_type):
   return str(_type) + '--' + str(uuid4())
+
+def is_timestamp(timestamp):
+  return re.match('\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?Z', timestamp)
 
 class SDO(object):
   def __init__(self, *args, **kwargs):
@@ -84,6 +88,8 @@ class SDO(object):
 class Campaign(SDO):
   type = 'campaign'
   def __init__(self, *args, **kwargs):
+    if not 'name' in kwargs:
+      raise ValueError('[cobstix2] Name attribute required for {type} object initialisation'.format(type=repr(self.type)))
     self.type = Campaign.type
     super(Campaign, self).__init__(*args, **kwargs)
 
@@ -94,54 +100,89 @@ class Campaign(SDO):
     else:
       self.aliases.append(aliases)
 
-  def set_first_seen(self, first_seen=None, precision=None):
-    if first_seen is None:
-      self.first_seen = self.created
-    else:
+  def set_first_seen(self, first_seen):
+    if is_timestamp(first_seen):
       self.first_seen = first_seen
-      if precision is not None:
-        self.first_seen_precision = precision
+    else:
+      raise ValueError('[cobstix2] {first_seen} is not a valid timestamp format'.format(first_seen=repr(first_seen)))
 
-  def set_objective(self, objective=None):
+  def set_first_seen(self, last_seen):
+    if is_timestamp(last_seen):
+      self.last_seen = last_seen
+    else:
+      raise ValueError('[cobstix2] {last_seen} is not a valid timestamp format'.format(last_seen=repr(last_seen)))
+
+  def set_objective(self, objective):
     self.objective = objective
 
 class CourseOfAction(SDO):
   type = 'course-of-action'
   def __init__(self, *args, **kwargs):
+    if not 'name' in kwargs:
+      raise ValueError('[cobstix2] Name attribute required for {type} object initialisation'.format(type=repr(self.type)))
     self.type = CourseOfAction.type
     super(CourseOfAction, self).__init__(*args, **kwargs)
 
 class Identity(SDO):
   type = 'identity'
   def __init__(self, *args, **kwargs):
+    if not 'name' in kwargs:
+      raise ValueError('[cobstix2] Name attribute required for {type} object initialisation'.format(type=repr(self.type)))
+    if not 'identity_class' in kwargs:
+      raise ValueError('[cobstix2] Identity Class attribute required for {type} object initialisation'.format(type=repr(self.type)))
     self.type = Identity.type
     super(Identity, self).__init__(*args, **kwargs)
     self.identity_class = kwargs.get('identity_class')
-    
+    if 'sectors' in kwargs:
+      self.set_sectors(kwargs.get('sectors'))
+    if 'contact_information' in kwargs:
+      self.set_contacts(kwargs.get('contact_information'))
+
+  def set_sectors(self, sectors):
+    if type(sectors) is str:
+      sectors = [sectors]
+
+    if type(sectors) is list and set(sectors).issubset(OPEN_VOCAB['sector']):
+      self.sectors = sectors
+    else:
+      raise ValueError('[cobstix2] {sectors} is not a valid {object} label vocab'.format(sectors=repr(sectors), object=repr(self.type)))
+
+  def set_contacts(contact_information):
+    self.contact_information = contact_information
 
 class Indicator(SDO):
   type = 'indicator'
   def __init__(self, *args, **kwargs):
+    if not 'pattern' in kwargs:
+      raise ValueError('[cobstix2] Pattern attribute required for {type} object initialisation'.format(type=repr(self.type)))
     self.type = Indicator.type
-    self.set_pattern(kwargs.get('pattern', None))
     super(Indicator, self).__init__(*args, **kwargs)
-    self.set_labels
+    self.pattern = kwargs.get('pattern')
     self.valid_from = kwargs.get('valid_from', self.created)
     if 'valid_until' in kwargs:
       self.set_valid_until(kwargs.get('valid_until'))
-
-  def set_pattern(self, pattern):
-    if pattern:
-      self.pattern = pattern
-    else:
-      raise ValueError('[cobstix2] {pattern} is not a valid Indicator pattern (required)'.format(pattern=repr(pattern)))
+    if 'kill_chain_phases' in kwargs:
+      self.import_kill_chain_phases(kwargs.get('kill_chain_phases'))
 
   def set_valid_until(self, valid_until):
     self.valid_until = valid_until
 
-  def set_kill_chain_phase(self, kill_chain_name, phase_name):
-    self.kill_chain_name = kill_chain_name
-    self.phase_name = phase_name
+  def add_kill_chain_phase(self, kill_chain_name, phase_name):
+    #Manually add a kill chain phase to an Indicator object
+    try:
+      if phase_name in KILL_CHAIN[kill_chain_name]:
+        if not hasattr(self, 'kill_chain_phases'):
+          self.kill_chain_phases = []
+        self.kill_chain_phases.append({'kill_chain_name' : kill_chain_name, 'phase_name' : phase_name})
+    except KeyError:
+      raise ValueError('[cobstix2] {kill_chain_name} is not a recognised Kill Chain'.format(kill_chain_name=repr(kill_chain_name)))
+
+  def import_kill_chain_phases(self, kill_chain_phases):
+    #Import Kill Chain Phases from a fully formed dictionary
+    if type(kill_chain_phases) is list:
+      self.kill_chain_phases = kill_chain_phases
+    else:
+      raise ValueError('[cobstix2] Failed to import Kill Chain list')
 
 #STUB
 class IntrusionSet(SDO):

@@ -62,4 +62,40 @@ OPEN_VOCAB = {
       'vulnerability-scanning'
     ],
   },
+  'sector' : [
+    'agriculture',
+    'aerospace',
+    'automotive',
+    'communications',
+    'construction',
+    'defense',
+    'education',
+    'energy',
+    'entertainment',
+    'financial-services',
+    'government-national',
+    'government-regional',
+    'government-local',
+    'government-public-services',
+    'healthcare',
+    'hospitality-leisure',
+    'infrastructure',
+    'insurance',
+    'manufacturing',
+    'mining',
+    'non-profit',
+    'pharmaceuticals',
+    'retail',
+    'technology',
+    'telecommunications',
+    'transportation',
+    'utilities'
+  ],
+}
+
+KILL_CHAIN = {
+  'PREPOST' : [
+    'pre-attack',
+    'post-attack'
+  ],
 }

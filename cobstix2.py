@@ -8,34 +8,17 @@ import gc
 import requests
 import inspect
 
-#Default values
-USER = 'cobsec'
-ELK = 'http://192.168.137.144:9200/'
+from vocab import *
+from config import settings
+
+USER = settings('stix')['created_by_string']
+ELK = settings('kb_elk')['kb_ip']
 
 def ns_uuid(_type, _string):
   return str(_type) + '--' + str(uuid3(NAMESPACE_URL, _string))
 
 def uuid(_type):
   return str(_type) + '--' + str(uuid4())
-
-BUNDLE_PROPERTIES = {
-  'attack-pattern' : 'attack_patterns',
-  'campaign' : 'campaigns',
-  'course-of-action' : 'courses_of_action',
-  'identity' : 'identities',
-  'indicator' : 'indicators',
-  'intrusion-set' : 'intrusion_sets',
-  'malware' : 'malware',
-  'marking-definition' : 'marking_definitions',
-  'observed-data' : 'observed_data',
-  'relationship' : 'relationships',
-  'report' : 'reports',
-  'sighting' : 'sightings',
-  'threat-actor' : 'threat_actors',
-  'tool' : 'tools',
-  'vulnerability' : 'vulnerabilities',
-  'custom-object' : 'custom_objects',
-}
 
 class SDO(object):
   def __init__(self, *args, **kwargs):
@@ -44,21 +27,28 @@ class SDO(object):
     self.version = kwargs.get('version', '1')
     self.id = kwargs.get('id', uuid(self.type))
     self.created_by_ref = kwargs.get('created_by_ref', ns_uuid('identity', USER))
-    if 'labels' in kwargs:
-      self.set_labels(kwargs.get('labels'))
+    self.set_labels(kwargs.get('labels', None))
     if 'name' in kwargs or 'description' in kwargs:
       self.set_text(kwargs.get('name', None), kwargs.get('description', None))
 
-  def set_text(self, name, description=None):
-    self.name = name
+  def set_text(self, name=None, description=None):
+    if name is not None:
+      self.name = name
     if description is not None:
       self.description = description
 
-  def set_labels(self, labels=None):
-    if labels is None:
-      self.labels = []
-    else:
+  def set_labels(self, labels):
+    if type(labels) is str:
+      labels = [labels]
+
+    if type(labels) is list and set(labels).issubset(OPEN_VOCAB['label'][self.type]):
       self.labels = labels
+    elif labels is None:
+      if self.type in OPEN_VOCAB:
+        raise ValueError('[cobstix2] {labels} is not a valid {object} label (required)'.format(labels=repr(labels), object=repr(self.type)))
+    else:
+      raise ValueError('[cobstix2] {labels} is not a valid {object} label vocab'.format(labels=repr(labels), object=repr(self.type)))
+    
 
   def set_tlp(self, definition, selectors=None):
     try:
@@ -70,7 +60,7 @@ class SDO(object):
     except AttributeError:
       pass
     tlp_id = ns_uuid('marking-definition', definition)
-    _tlp = query_by_ref('elk', tlp_id)
+    _tlp = query(tlp_id)
     if _tlp is False:
       _tlp = TLPMarking(definition=definition, id=tlp_id)
     if selectors is None:
@@ -81,10 +71,11 @@ class SDO(object):
 
   def set_created_by_ref(self, name, identity_class):
     id_ref = ns_uuid('identity', name)
-    _identity = query_by_ref('elk', id_ref)
+    _identity = query(id_ref)
     if _identity is False:
       _identity = Identity(name=name, identity_class=identity_class, id=id_ref)
-    self.created_by_ref = _identity.id
+    else:
+      self.created_by_ref = _identity[0].id
     return _identity
 
   def __repr__(self):
@@ -132,19 +123,18 @@ class Indicator(SDO):
   type = 'indicator'
   def __init__(self, *args, **kwargs):
     self.type = Indicator.type
+    self.set_pattern(kwargs.get('pattern', None))
     super(Indicator, self).__init__(*args, **kwargs)
+    self.set_labels
     self.valid_from = kwargs.get('valid_from', self.created)
-    if 'pattern' in kwargs:
-      self.set_pattern(kwargs.get('pattern'), kwargs.get('pattern_lang', None), kwargs.get('pattern_lang_version', None))
     if 'valid_until' in kwargs:
       self.set_valid_until(kwargs.get('valid_until'))
-    
-  def set_pattern(self, pattern, pattern_lang=None, pattern_lang_version=None):
-    self.pattern = pattern
-    if pattern_lang:
-      self.pattern_lang = pattern_lang
-    if pattern_lang_version:
-      self.pattern_lang_version = pattern_lang_version
+
+  def set_pattern(self, pattern):
+    if pattern:
+      self.pattern = pattern
+    else:
+      raise ValueError('[cobstix2] {pattern} is not a valid Indicator pattern (required)'.format(pattern=repr(pattern)))
 
   def set_valid_until(self, valid_until):
     self.valid_until = valid_until
@@ -252,33 +242,35 @@ class TLPMarking(DataMarking):
 
 class Bundle():
   type = 'bundle'
-  def __init__(self, objects=None):
+  def __init__(self, *args, **kwargs):
     self.type = Bundle.type
     self.id = uuid(self.type)
     self.spec_version = '2.0'
+    self.set_objects(kwargs.get('objects', None))
+
+  def set_objects(self, objects):
+    if type(objects) is list:
+      self.objects = objects
+    else:
+      raise ValueError('[cobstix2] {objects} is not a valid object list to be Bundled (required)'.format(objects=repr(objects)))
+
+  def add_object(self, object):
+    if isinstance(object, SDO):
+      self.objects.append(object.__dict__)
 
   def __repr__(self):
     return json.dumps(self.__dict__, sort_keys=True, indent=4, separators=(',', ': '))
-
-def bundle(*objects):
-  bundle = Bundle()
-  for obj in objects:
-    _property = str(BUNDLE_PROPERTIES[obj.type])
-    try:
-      getattr(bundle, _property).append(obj.__dict__)      
-    except AttributeError:
-      setattr(bundle, _property, [obj.__dict__])
-  return bundle
 
 def get_all_SDO():
   SDO_list = []
   for obj in gc.get_objects():
     if isinstance(obj, SDO):
-      SDO_list.append(obj)
+      SDO_list.append(obj.__dict__)
   return SDO_list
 
 def dict_to_obj(_dict):
-
+  #Use on incoming stix render as appropriate Class object (using this library)
+  #Note: If attributes of incoming objects are not supported by this library, they won't be rendered
   if 'definition_type' in _dict:
     match_string = 'definition_type'
   else:
@@ -294,36 +286,23 @@ def dict_to_obj(_dict):
         pass
   return None
 
-def query_by_ref(query_type, _id):
-  if query_type == 'local':
-    for obj in gc.get_objects():
-      if isinstance(obj, SDO):
-        if obj.id == _id:
-          return obj
-    return False
-  elif query_type == 'elk':
-    _index = 'cobsec'
-    _type = _id.split('--')[0]
-    _id = _id.split('--')[1]
-    endpoint = ELK + '%s/%s/%s' % (_index, _type, _id)
-    r = requests.get(endpoint)
-    json_content = r.json()
-    try:
-      new_obj = dict_to_obj(json_content["_source"])
-      return new_obj
-    except KeyError:
-      return False
-  else:
-    return False
+def query(value):
+  try:
+    query_type = settings('kb')['kb_type']
+  except KeyError:
+    print "[cobstix2] Could not read kb_type from kb settings in config.ini"
+    sys.exit(0)
 
-def query_by_indicator(query_type, value):
   if query_type == 'elk':
-    _index = 'cobsec'
-    _type = 'indicator'
-    endpoint = ELK + '%s/%s/_search' % (_index, _type)
+    _index = USER
+    endpoint = ELK + '%s/_search' % _index
     payload = '{"query":{"query_string":{"query": "%s"}}}' % value
-    r = requests.post(endpoint, payload)
-    json_content = r.json()
+    try:
+      r = requests.post(endpoint, payload)
+      json_content = r.json()
+    except requests.exceptions.RequestException as e:
+      print e
+      return False
     try:
       hit_list = json_content['hits']['hits']
       obj_list = []
@@ -333,22 +312,23 @@ def query_by_indicator(query_type, value):
       return obj_list
     except KeyError:
       return False
-    return json_content
   else:
     return False
 
 def put_elk(*_payloads):
   results = []
-  #print _payloads
   for _payload in _payloads:
     #print _payload
     if isinstance(_payload, SDO) or isinstance(_payload, Bundle):
-      _index = 'cobsec'
+      _index = USER
       _type = _payload.type
       _id = _payload.id.split('--')[1]
     else:
       return None
     endpoint = ELK + '%s/%s/%s' % (_index, _type, _id)
-    r = requests.put(endpoint, data=str(_payload))
-    results.append(r.content)
+    try:
+      r = requests.put(endpoint, data=str(_payload))
+      results.append(r.content)
+    except requests.exceptions.RequestException as e:
+      print e
   return results

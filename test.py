@@ -2,23 +2,24 @@ from cobstix2 import *
 
 def main():
 
-  ident = Identity(name='ferwg', identity_class='something')
+  #ident = Identity(name='ferwg', identity_class='something')
   
 
-  ident.set_sectors('entertainment')
-  ind = Indicator(labels=['malicious-activity'], pattern="file-object.hashes.md5 = '3773a88f65a5e780c8dff9dcd3a056f3'")
+  #ident.set_sectors('entertainment')
+  #ind = Indicator(labels=['malicious-activity', 'anonymization', 'derp'])
   #tlp_red = ind.set_tlp('red', ['description', 'title'])
 
   ind2 = Indicator(labels=['malicious-activity'], pattern="file-object.hashes.md5 = '3773a88f65a5e780c8dff9dce3a056f3'")
-  #tlp_red = ind.set_tlp('red')
+  tlp_red = ind2.set_tlp('red')
+  #mal = Malware(labels=['remote-access-trojan', 'screen-capture'], )
 
-  mal = Malware(labels=['remote-access-trojan', 'screen-capture'], )
+  #rel = Relationship('indicates', 'bundle--350893cc-95ea-4787-9dcf-52855ece21b9')
+  #rel.set_text('something in desc')
 
-  rel = Relationship('indicates', ind.id, mal.id)
-  rel.set_text('something in desc')
+  #iset = IntrusionSet(name='badguy', primary_motivation='accidental', secondary_motivations=['accidental', 'coercion'])
 
-  cam = Campaign(name='A Campaign Name')
-  cam.set_aliases(['test', 'another'])
+  #cam = Campaign(name='something', first_seen='2015-02-03T14:56:21.528000Z')
+  #cam.set_aliases(['test', 'another'])
 
   all_sdo = get_all_SDO()
 

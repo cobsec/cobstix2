@@ -2,15 +2,13 @@ from cobstix2 import *
 
 def main():
 
-  #ident = Identity(name='ferwg', identity_class='something')
   
-
-  #ident.set_sectors('entertainment')
-  #ind = Indicator(labels=['malicious-activity', 'anonymization', 'derp'])
+  ind = Indicator(name='Something', labels=['malicious-activity'], pattern="file-object.hashes.md5 = '3773a88f65a5e780c8dff9dce3a056f3'")
+  #ind.name = 'a new one'
   #tlp_red = ind.set_tlp('red', ['description', 'title'])
 
-  ind2 = Indicator(labels=['malicious-activity'], pattern="file-object.hashes.md5 = '3773a88f65a5e780c8dff9dce3a056f3'")
-  tlp_red = ind2.set_tlp('red')
+  #ind2 = Indicator(labels=['malicious-activity'], pattern="file-object.hashes.md5 = '3773a88f65a5e780c8dff9dce3a056f3'")
+  #tlp_red = ind2.set_tlp('red')
   #mal = Malware(labels=['remote-access-trojan', 'screen-capture'], )
 
   #rel = Relationship('indicates', 'bundle--350893cc-95ea-4787-9dcf-52855ece21b9')

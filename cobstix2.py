@@ -8,6 +8,7 @@ import gc
 import requests
 import inspect
 import re
+import traceback
 
 from vocab import *
 from config import settings
@@ -21,118 +22,151 @@ def ns_uuid(_type, _string):
 def uuid(_type):
   return str(_type) + '--' + str(uuid4())
 
-def is_timestamp(timestamp):
-  return re.match('\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?Z', timestamp)
-
-def is_valid(input, vocab_ref):
-  if type(input) is str:
-    input = [input]
-
-  if type(input) is list:
-    voc_lst = vocab_ref.rsplit('-', 2)
-    if voc_lst[-2] == 'label':
-      test_list = VOCABS[voc_lst[-1]][voc_lst[-2]][voc_lst[-3]]
-      test_input = input
-    else:
-      voc_lst = vocab_ref.rsplit('-', 1)
-      test_list = VOCABS[voc_lst[-1]][voc_lst[-2]]
-      test_input = input
-    if set(input).issubset(test_list):
+def is_id(id_ref):
+  try:
+    if re.match('.{1,64}--[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', id_ref):
+      #print 'id PASSED: ' + id_ref
       return True
     else:
-      raise ValueError('[cobstix2] {test_input} is not a valid {vocab_ref} vocab (required)'.format(test_input=repr(test_input), vocab_ref=repr(vocab_ref)))
-  else:
-    raise TypeError('[cobstix2] {test_input} is not a valid input type {type}'.format(test_input=repr(test_input), type=repr(type(input))))
+      raise ValueError('[cobstix2] {id_ref} is not a valid identity reference format'.format(id_ref=repr(id_ref)))
+  except (ValueError), e:
+    traceback.print_exc()
+    sys.exit(0)
+
+def is_timestamp(timestamp):
+  try:
+    if re.match('\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?Z', timestamp):
+      #print 'timestamp PASSED: ' + timestamp
+      return True
+    else:
+      raise ValueError('[cobstix2] {timestamp} is not a valid timestamp format'.format(timestamp=repr(timestamp)))
+  except (ValueError), e:
+    traceback.print_exc()
+    sys.exit(0)
+
+def is_datamarking(datamarking):
+  return True
+
+def is_killchain(killchain):
+  return True
+
+def is_timestamp(timestamp):
+  try:
+    if re.match('\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?Z', timestamp):
+      #print 'timestamp PASSED: ' + timestamp
+      return True
+    else:
+      raise ValueError('[cobstix2] {timestamp} is not a valid timestamp format'.format(timestamp=repr(timestamp)))
+  except (ValueError), e:
+    traceback.print_exc()
+    sys.exit(0)
+
+def is_valid(input, _type, vocab_ref):
+  try:
+    if vocab_ref == 'timestamp':
+      return is_timestamp(input)
+
+    if vocab_ref == 'id':
+      return is_id(input)
+
+    if vocab_ref == 'datamarking':
+      return is_datamarking(input)
+
+    if vocab_ref == 'killchain':
+      return is_killchain(input)
+
+    if type(input) is not _type:
+      raise TypeError('[cobstix2] {input} is not a valid input type {type}; Expected {_type}'.format(input=repr(input), type=repr(type(input)), _type=repr(_type)))
+
+    if vocab_ref is not None:
+      if type(input) is str:
+        input = [input]
+
+      voc_lst = vocab_ref.rsplit('-', 2)
+      if voc_lst[-2] == 'label':
+        test_list = VOCABS[voc_lst[-1]][voc_lst[-2]][voc_lst[-3]]
+        test_input = input
+      else:
+        voc_lst = vocab_ref.rsplit('-', 1)
+        test_list = VOCABS[voc_lst[-1]][voc_lst[-2]]
+        test_input = input
+      if not set(input).issubset(test_list):
+        raise ValueError('[cobstix2] {test_input} is not a valid {vocab_ref} vocab (required)'.format(test_input=repr(test_input), vocab_ref=repr(vocab_ref)))
+    return True
+  except (ValueError, TypeError), e:
+    traceback.print_exc()
+    sys.exit(0)
 
 def err_required(obj_type, attribute):
-  raise ValueError('[cobstix2] {attribute} attribute required for {type} object initialisation'.format(attribute=repr(attribute), type=repr(obj_type)))
+  try:
+    raise ValueError('[cobstix2] {attribute} attribute required for {type} object initialisation'.format(attribute=repr(attribute), type=repr(obj_type)))
+  except (ValueError), e:
+    traceback.print_exc()
+    sys.exit(0)
 
 
 
 class SDO(object):
   def __init__(self, *args, **kwargs):
-    self.created = kwargs.get('created', datetime.datetime.utcnow().isoformat('T') + 'Z')
-    self.modified = kwargs.get('modified', self.created)
-    self.version = kwargs.get('version', '1')
-    self.id = kwargs.get('id', uuid(self.type))
-    self.created_by_ref = kwargs.get('created_by_ref', ns_uuid('identity', USER))
-    self.set_labels(kwargs.get('labels', None))
-    if 'name' in kwargs or 'description' in kwargs:
-      self.set_text(kwargs.get('name', None), kwargs.get('description', None))
+    self.created(kwargs.get('created', datetime.datetime.utcnow().isoformat('T') + 'Z'))
+    self.modified(kwargs.get('modified', self.created))
+    self.id(kwargs.get('id', uuid(self.type)))
+    self.created_by_ref(kwargs.get('created_by_ref', ns_uuid('identity', USER)))
+    self.labels(kwargs.get('labels', None))
+    self.name(kwargs.get('name', None))
+    self.description(kwargs.get('description', None))
+    self.revoked(kwargs.get('revoked', None))
+    self.external_references(kwargs.get('external_references', None))
+    self.object_marking_refs(kwargs.get('object_marking_refs', None))
+    self.granular_markings(kwargs.get('granular_markings', None))
 
-  def set_text(self, name=None, description=None):
-    if name is not None:
-      self.name = name
-    if description is not None:
-      self.description = description
-
-  def set_timestamp(object, attribute, timestamp):
-    if is_timestamp(timestamp):
-      setattr(object, attribute, timestamp)
-    else:
-      raise ValueError('[cobstix2] {timestamp} is not a valid timestamp format'.format(timestamp=repr(timestamp)))
-
-  def set_attribute(object, attribute, input, vocab_ref=None):
-    #Will set an attribute of type list or string with optional vocab check
-    # Consider putting an input type checker here for str/list/id/boolean, etc. Would need the spec types captured in a vocab dict, perhaps?
-      if vocab_ref is not None:
-        if is_valid(input, vocab_ref):
-          setattr(object, attribute, input)
-      else:
+  def set_attribute(object, attribute, input, _type, vocab_ref=None, required=False):
+    if input is not None:
+      if is_valid(input, _type, vocab_ref):
         setattr(object, attribute, input)
-
-  def set_labels(self, labels):
-    if labels is None:
-      if self.type in VOCABS:
-        raise ValueError('[cobstix2] {labels} is not a valid {object} label (required)'.format(labels=repr(labels), object=repr(self.type)))
     else:
-      vocab_ref = self.type + '-label-ov'
-      self.set_attribute('labels', labels, vocab_ref)
+      if required:
+        err_required(object.type, attribute)
 
-    """
-    # Commenting this out for now as it includes an 'add' functionality which implies version control
-    # Making it just a 'setter' would be preferable, but setting on initialisation for MULTIPLE DICTIONARY ENTRIES IN A LIST is difficult to figure out at the moment
-    # May need to create a custom 'kill_chain_setter' like the tlp/datamarking - perhaps consider enumerating all kill_chain dictionary entries in vocab for easy import
-    def add_kill_chain_phase(self, kill_chain_name, phase_name):
-    #Manually add a kill chain phase to an Indicator object
-      try:
-        if phase_name in VOCAB['kill_chain'][kill_chain_name][kill_chain_name]:
-          if not hasattr(self, 'kill_chain_phases'):
-            self.kill_chain_phases = []
-          self.kill_chain_phases.append({'kill_chain_name' : kill_chain_name, 'phase_name' : phase_name})
-      except KeyError:
-        raise ValueError('[cobstix2] {kill_chain_name} is not a recognised Kill Chain'.format(kill_chain_name=repr(kill_chain_name)))
-    """
+  def labels(self, _labels):
+    vocab_ref = self.type + '-label-ov'
+    self.set_attribute('labels', _labels, list, vocab_ref, False)
 
-    def import_kill_chain_phases(self, kill_chain_phases):
-      #Import Kill Chain Phases from a fully formed dictionary - doesn't check vocabs as some may use different kill chain definitions
-      if type(kill_chain_phases) is list:
-        self.kill_chain_phases = kill_chain_phases
-      else:
-        raise ValueError('[cobstix2] Failed to import Kill Chain list')
+  def created(self, _created):
+    self.set_attribute('created', _created, str, 'timestamp', True)
 
-  def set_created_by_ref(self, name, identity_class):
-    id_ref = ns_uuid('identity', name)
-    _identity = query(id_ref)
-    if _identity is False:
-      _identity = Identity(name=name, identity_class=identity_class, id=id_ref)
-    else:
-      self.created_by_ref = _identity[0].id
-    return _identity
+  def modified(self, _modified):
+    self.set_attribute('modified', _modified, str, 'timestamp', True)
+
+  def id(self, _id):
+    self.set_attribute('id', _id, str, 'id', True)
+
+  def created_by_ref(self, _created_by_ref):
+    self.set_attribute('created_by_ref', _created_by_ref, str, 'id', True)
+
+  def name(self, _name):
+    required = True
+    if self.type == 'relationship':
+      required = False
+    self.set_attribute('name', _name, str, None, required)
+
+  def description(self, _description):
+    self.set_attribute('description', _description, str)
+
+  def revoked(self, _revoked):
+    self.set_attribute('revoked', _revoked, bool)
+
+  def external_references(self, _external_references):
+    self.set_attribute('external_references', _external_references, str)
+
+  def object_marking_refs(self, _object_marking_refs):
+    self.set_attribute('object_marking_refs', _object_marking_refs, list)
+
+  def granular_markings(self, _granular_markings):
+    self.set_attribute('granular_markings', _granular_markings, list, 'datamarking')
 
   def set_tlp(self, definition, selectors=None):
     tlp_id = ns_uuid('marking-definition', definition)
-    try:
-      del self.object_marking_refs
-    except AttributeError:
-      pass
-    try:
-      del self.granular_markings
-    except AttributeError:
-      pass
-    _tlp = False
-    if _tlp is False:
-      _tlp = TLPMarking(definition=definition, id=tlp_id)
     if selectors is None:
       self.object_marking_refs = [tlp_id]
     else:
@@ -145,158 +179,186 @@ class SDO(object):
 class Campaign(SDO):
   type = 'campaign'
   def __init__(self, *args, **kwargs):
-    if not 'name' in kwargs:
-      err_required(self.type, 'name')
     self.type = Campaign.type
     super(Campaign, self).__init__(*args, **kwargs)
-    if 'aliases' in kwargs:
-      self.set_attribute('aliases', kwargs.get('aliases'))
-    if 'first_seen' in kwargs:
-      self.set_timestamp('first_seen', kwargs.get('first_seen'))
-    if 'last_seen' in kwargs:
-      self.set_timestamp('last_seen', kwargs.get('last_seen'))
-    if 'objective' in kwargs:
-      self.set_objective(kwargs.get('objective'))
+    self.aliases(kwargs.get('aliases', None))
+    self.first_seen(kwargs.get('first_seen', None))
+    self.last_seen(kwargs.get('last_seen', None))
+    self.objective(kwargs.get('objective', None))
 
-  def set_objective(self, objective):
-    self.objective = objective
+  def aliases(self, _aliases):
+    self.set_attribute('aliases', _aliases, list)
+
+  def first_seen(self, _first_seen):
+    self.set_attribute('first_seen', _first_seen, str, 'timestamp')
+
+  def last_seen(self, _last_seen):
+    self.set_attribute('last_seen', _last_seen, str, 'timestamp')
+
+  def objective(self, _objective):
+    self.set_attribute('objective', _objective, str)
 
 class CourseOfAction(SDO):
   type = 'course-of-action'
   def __init__(self, *args, **kwargs):
-    if not 'name' in kwargs:
-      err_required(self.type, 'name')
     self.type = CourseOfAction.type
     super(CourseOfAction, self).__init__(*args, **kwargs)
 
 class Identity(SDO):
   type = 'identity'
   def __init__(self, *args, **kwargs):
-    if not 'name' in kwargs:
-      err_required(self.type, 'name')
-    if not 'identity_class' in kwargs:
-      err_required(self.type, 'identity_class')
     self.type = Identity.type
+    if 'id_seed' in kwargs:
+      kwargs['id'] = ns_uuid(self.type, kwargs.get('id_seed'))
+      del kwargs['id_seed']
     super(Identity, self).__init__(*args, **kwargs)
-    self.set_attribute('identity_class', kwargs.get('identity_class'), 'identity-class-ov')
-    if 'sectors' in kwargs:
-      self.set_attribute('sectors', kwargs.get('sectors'), 'industry-sector-ov')
-    if 'contact_information' in kwargs:
-      self.set_contacts(kwargs.get('contact_information'))
+    self.identity_class(kwargs.get('identity_class', None))
+    self.sectors(kwargs.get('sectors', None))
+    self.contact_information(kwargs.get('contact_information', None))
 
-  def set_contacts(contact_information):
-    self.contact_information = contact_information
+  def identity_class(self, _identity_class):
+    self.set_attribute('identity_class', _identity_class, str, 'identity-class-ov', True)
+
+  def sectors(self, _sectors):
+    self.set_attribute('sectors', _sectors, str, 'industry-sector-ov', False)
+
+  def contact_information(self, _contact_information):
+    self.set_attribute('contact_information', _contact_information, str)
 
 class Indicator(SDO):
   type = 'indicator'
   def __init__(self, *args, **kwargs):
-    if not 'pattern' in kwargs:
-      err_required(self.type, 'pattern')
     self.type = Indicator.type
     super(Indicator, self).__init__(*args, **kwargs)
-    self.pattern = kwargs.get('pattern')
-    if 'valid_from' in kwargs:
-      self.set_timestamp('valid_from', kwargs.get('valid_from'))
-    else:
-      self.valid_from = self.created
+    self.pattern(kwargs.get('pattern', None))
+    self.valid_from(kwargs.get('valid_from', self.created))
+    self.valid_until(kwargs.get('valid_until', None))
+    self.kill_chain_phases(kwargs.get('kill_chain_phases', None))
 
-    if 'valid_until' in kwargs:
-      self.set_timestamp('valid_until', kwargs.get('valid_until'))
-    if 'kill_chain_phases' in kwargs:
-      self.import_kill_chain_phases(kwargs.get('kill_chain_phases'))
+  def pattern(self, _pattern):
+    self.set_attribute('pattern', _pattern, str, None, True)
+
+  def valid_from(self, _valid_from):
+    self.set_attribute('valid_from', _valid_from, str, 'timestamp')
+
+  def valid_until(self, _valid_until):
+    self.set_attribute('valid_until', _valid_until, str, 'timestamp')
+
+  def kill_chain_phases(self, _kill_chain_phases):
+    self.set_attribute('kill_chain_phases', _kill_chain_phases, list, 'killchain')
 
 class IntrusionSet(SDO):
   type = 'intrusion-set'
   def __init__(self, *args, **kwargs):
-    if not 'name' in kwargs:
-      err_required(self.type, 'name')
     self.type = IntrusionSet.type
     super(IntrusionSet, self).__init__(*args, **kwargs)
-    if 'aliases' in kwargs:
-      self.set_attribute('aliases', kwargs.get('aliases'))
-    if 'first_seen' in kwargs:
-      self.set_timestamp('first_seen', kwargs.get('first_seen'))
-    if 'last_seen' in kwargs:
-      self.set_timestamp('last_seen', kwargs.get('last_seen'))
-    if 'goals' in kwargs:
-      self.set_attribute('goals',kwargs.get('goals'))
-    if 'resource_level' in kwargs:
-      self.set_attribute('resource_level', kwargs.get('resource_level'), 'attack-resource-level-ov')
-    if 'primary_motivation' in kwargs:
-      self.set_attribute('primary_motivation', kwargs.get('primary_motivation'), 'attack-motivation-ov')
-    if 'secondary_motivations' in kwargs:
-      self.set_attribute('secondary_motivations', kwargs.get('secondary_motivations'), 'attack-motivation-ov')
+    self.aliases(kwargs.get('aliases', None))
+    self.first_seen(kwargs.get('first_seen', None))
+    self.last_seen(kwargs.get('last_seen', None))
+    self.goals(kwargs.get('goals', None))
+    self.resource_level(kwargs.get('resource_level', None))
+    self.primary_motivation(kwargs.get('primary_motivation', None))
+    self.secondary_motivations(kwargs.get('secondary_motivations', None))
+
+  def aliases(self, _aliases):
+    self.set_attribute('aliases', _aliases, list)
+
+  def first_seen(self, _first_seen):
+    self.set_attribute('first_seen', _first_seen, str, 'timestamp')
+
+  def last_seen(self, _last_seen):
+    self.set_attribute('last_seen', _last_seen, str, 'timestamp')
+
+  def goals(self, _goals):
+    self.set_attribute('goals', _goals, str)
+
+  def resource_level(self, _resource_level):
+    self.set_attribute('resource_level', _resource_level, str, 'attack-resource-level-ov')
+
+  def primary_motivation(self, _primary_motivation):
+    self.set_attribute('primary_motivation', _primary_motivation, str, 'attack-motivation-ov')
+
+  def secondary_motivations(self, _secondary_motivations):
+    self.set_attribute('secondary_motivations', _secondary_motivations, str, 'attack-motivation-ov')
 
 class Malware(SDO):
   type = 'malware'
   def __init__(self, *args, **kwargs):
-    if not 'name' in kwargs:
-      err_required(self.type, 'name')
     self.type = Malware.type
     super(Malware, self).__init__(*args, **kwargs)
-    if 'kill_chain_phases' in kwargs:
-      self.import_kill_chain_phases(kwargs.get('kill_chain_phases'))
+    self.kill_chain_phases(kwargs.get('kill_chain_phases', None))
+  
+  def kill_chain_phases(self, _kill_chain_phases):
+    self.set_attribute('kill_chain_phases', _kill_chain_phases, list, 'killchain')
 
 class Report(SDO):
   type = 'report'
   def __init__(self, *args, **kwargs):
-    if not 'name' in kwargs:
-      err_required(self.type, 'name')
     self.type = Report.type
     super(Report, self).__init__(*args, **kwargs)
-    self.set_timestamp('published', kwargs.get('published', datetime.datetime.utcnow().isoformat('T') + 'Z'))
-    
-  def set_object_refs(self, object_refs):
-    self.object_refs = []
-    if type(object_refs) is list:
-      self.object_refs = object_refs
-    else:
-      self.object_refs.append(object_refs)
+    self.published(kwargs.get('published', datetime.datetime.utcnow().isoformat('T') + 'Z'))
+    self.object_refs(kwargs.get('object_refs', None))
+
+  def published(self, _published):
+    self.set_attribute('published', _published, str, 'timestamp', True)
+
+  def object_refs(self, _object_refs):
+    self.set_attribute('object_refs', _object_refs, list, None, True)
 
 class ThreatActor(SDO):
   type = 'threat-actor'
   def __init__(self, *args, **kwargs):
-    if not 'name' in kwargs:
-      err_required(self.type, 'name')
     self.type = ThreatActor.type
     super(ThreatActor, self).__init__(*args, **kwargs)
-    if 'aliases' in kwargs:
-      self.set_attribute('aliases', kwargs.get('aliases'))
-    if 'roles' in kwargs:
-      self.set_attribute('roles', kwargs.get('roles'), 'threat-actor-role-ov')
-    if 'goals' in kwargs:
-      self.set_attribute('goals',kwargs.get('goals'))
-    if 'sophistication' in kwargs:
-      self.set_attribute('sophistication', kwargs.get('sophistication'), 'threat-actor-sophistication-ov')
-    if 'resource_level' in kwargs:
-      self.set_attribute('resource_level', kwargs.get('resource_level'), 'attack-resource-level-ov')
-    if 'primary_motivation' in kwargs:
-      self.set_attribute('primary_motivation', kwargs.get('primary_motivation'), 'attack-motivation-ov')
-    if 'secondary_motivations' in kwargs:
-      self.set_attribute('secondary_motivations', kwargs.get('secondary_motivations'), 'attack-motivation-ov')
-    if 'personal_motivations' in kwargs:
-      self.set_attribute('personal_motivations', kwargs.get('personal_motivations'), 'attack-motivation-ov')
+    self.aliases(kwargs.get('aliases', None))
+    self.roles(kwargs.get('roles', None))
+    self.goals(kwargs.get('goals', None))
+    self.sophistication(kwargs.get('sophistication', None))
+    self.resource_level(kwargs.get('resource_level', None))
+    self.primary_motivation(kwargs.get('primary_motivation', None))
+    self.secondary_motivations(kwargs.get('secondary_motivations', None))
+
+  def aliases(self, _aliases):
+    self.set_attribute('aliases', _aliases, str)
+
+  def roles(self, _roles):
+    self.set_attribute('roles', _roles, str, 'threat-actor-role-ov')
+
+  def goals(self, _goals):
+    self.set_attribute('goals', _goals, str)
+
+  def sophistication(self, _sophistication):
+    self.set_attribute('sophistication', _sophistication, str, 'threat-actor-sophistication-ov')
+
+  def resource_level(self, _resource_level):
+    self.set_attribute('resource_level', _resource_level, str, 'attack-resource-level-ov')
+
+  def primary_motivation(self, _primary_motivation):
+    self.set_attribute('primary_motivation', _primary_motivation, str, 'attack-motivation-ov')
+
+  def secondary_motivations(self, _secondary_motivations):
+    self.set_attribute('secondary_motivations', _secondary_motivations, str, 'attack-motivation-ov')
+
+  def personal_motivation(self, _personal_motivation):
+    self.set_attribute('personal_motivation', _personal_motivation, str, 'attack-motivation-ov')
 
 class Tool(SDO):
   type = 'tool'
   def __init__(self, *args, **kwargs):
-    if not 'name' in kwargs:
-      err_required(self.type, 'name')
     self.type = Tool.type
     super(Tool, self).__init__(*args, **kwargs)
-    if 'kill_chain_phases' in kwargs:
-      self.import_kill_chain_phases(kwargs.get('kill_chain_phases'))
-    if 'tool_version' in kwargs:
-      self.set_tool_version(kwargs.get('tool_version'))
+    self.tool_version(kwargs.get('tool_version', None))
+    self.kill_chain_phases(kwargs.get('kill_chain_phases', None))
 
-  def set_tool_version(self, tool_version):
-    self.set_attribute('tool_version', tool_version)
+  def tool_version(self, _tool_version):
+    self.set_attribute('tool_version', _tool_version, str)
+
+  def kill_chain_phases(self, _kill_chain_phases):
+    self.set_attribute('kill_chain_phases', _kill_chain_phases, list, 'killchain')
 
 class Vulnerability(SDO):
   type = 'vulnerability'
   def __init__(self, *args, **kwargs):
-    if not 'name' in kwargs:
-      err_required(self.type, 'name')
     self.type = Vulnerability.type
     return super(Vulnerability, self).__init__(*args, **kwargs)
 
@@ -326,24 +388,36 @@ class Relationship(SDO):
 class Sighting(SDO):
   type = 'sighting'
   def __init__(self, *args, **kwargs):
-    if not 'sighting_of_ref' in kwargs:
-      err_required(self.type, 'sighting_of_ref')
     self.type = Sighting.type
     super(Sighting, self).__init__(*args, **kwargs)
-    if 'sighting_of_ref' in kwargs:
-      self.set_attribute('sighting_of_ref', kwargs.get('sighting_of_ref'))
-    if 'first_seen' in kwargs:
-      self.set_timestamp('first_seen', kwargs.get('first_seen'))
-    if 'last_seen' in kwargs:
-      self.set_timestamp('last_seen', kwargs.get('last_seen'))
-    if 'count' in kwargs:
-      self.set_attribute('count', kwargs.get('count'))
-    if 'observed_data_refs' in kwargs:
-      self.set_attribute('observed_data_refs', kwargs.get('observed_data_refs'))
-    if 'where_sighted_refs' in kwargs:
-      self.set_attribute('where_sighted_refs', kwargs.get('where_sighted_refs'))
-    if 'summary' in kwargs:
-      self.set_attribute('summary', kwargs.get('summary'))
+    self.sighting_of_ref(kwargs.get('sighting_of_ref', None))
+    self.first_seen(kwargs.get('first_seen', None))
+    self.last_seen(kwargs.get('last_seen', None))
+    self.count(kwargs.get('count', None))
+    self.observed_data_refs(kwargs.get('observed_data_refs', None))
+    self.where_sighted_refs(kwargs.get('where_sighted_refs', None))
+    self.summary(kwargs.get('summary', None))
+
+  def sighting_of_ref(self, _sighting_of_ref):
+    self.set_attribute('sighting_of_ref', _sighting_of_ref, str, 'id', True)
+
+  def first_seen(self, _first_seen):
+    self.set_attribute('first_seen', _first_seen, str, 'timestamp')
+
+  def last_seen(self, _last_seen):
+    self.set_attribute('last_seen', _last_seen, str, 'timestamp')
+
+  def count(self, _count):
+    self.set_attribute('count', _count, int)
+
+  def observed_data_refs(self, _observed_data_refs):
+    self.set_attribute('count', _observed_data_refs, list)
+
+  def where_sighted_refs(self, _where_sighted_refs):
+    self.set_attribute('count', _where_sighted_refs, list)
+
+  def summary(self, _summary):
+    self.set_attribute('count', _summary)
 
 class DataMarking(SDO):
   type = 'marking-definition'
@@ -356,7 +430,10 @@ class TLPMarking(DataMarking):
   def __init__(self, *args, **kwargs):
     self.definition_type = TLPMarking.definition_type
     super(TLPMarking, self).__init__(*args, **kwargs)
-    self.definition = kwargs.get('definition')
+    self.definition(kwargs.get('definition', None))
+
+  def definition(self, _definition):
+    self.set_attribute('definition', _definition, dict, 'datamarking', True)
 
 class Bundle():
   type = 'bundle'
@@ -364,17 +441,19 @@ class Bundle():
     self.type = Bundle.type
     self.id = uuid(self.type)
     self.spec_version = '2.0'
-    self.set_objects(kwargs.get('objects', None))
+    self.objects(kwargs.get('objects', None))
 
-  def set_objects(self, objects):
-    if type(objects) is list:
-      self.objects = objects
-    else:
-      raise ValueError('[cobstix2] {objects} is not a valid object list to be Bundled (required)'.format(objects=repr(objects)))
-
-  def add_object(self, object):
-    if isinstance(object, SDO):
-      self.objects.append(object.__dict__)
+  def objects(self, _objects):
+    try:
+      self.objects = []
+      if type(_objects) is list:
+        for _object in _objects:
+          self.objects.append(_object.__dict__)
+      else:
+        raise TypeError('[cobstix2] {_objects} is not a valid object list to be Bundled (required)'.format(_objects=repr(_objects)))
+    except (TypeError), e:
+      traceback.print_exc()
+      sys.exit(0)
 
   def __repr__(self):
     return json.dumps(self.__dict__, sort_keys=True, indent=4, separators=(',', ': '))
@@ -383,7 +462,7 @@ def get_all_SDO():
   SDO_list = []
   for obj in gc.get_objects():
     if isinstance(obj, SDO):
-      SDO_list.append(obj.__dict__)
+      SDO_list.append(obj)
   return SDO_list
 
 def dict_to_obj(_dict):

@@ -38,7 +38,8 @@ def main():
   all_sdo.append(rep)
   bun = Bundle(objects=all_sdo)
 
-  print bun
+  with open('out.json', 'wb') as f:
+    f.write(str(bun))
 
 
 if __name__ == '__main__':

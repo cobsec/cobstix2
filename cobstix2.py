@@ -5,10 +5,10 @@ from hashlib import sha1
 import datetime
 from pprint import pprint
 import gc
-import requests
 import inspect
 import re
 import traceback
+import ast
 
 from vocab import *
 from config import settings
@@ -157,7 +157,7 @@ class SDO(object):
     self.set_attribute('revoked', _revoked, bool)
 
   def external_references(self, _external_references):
-    self.set_attribute('external_references', _external_references, str)
+    self.set_attribute('external_references', _external_references, list)
 
   def object_marking_refs(self, _object_marking_refs):
     self.set_attribute('object_marking_refs', _object_marking_refs, list)
@@ -175,6 +175,16 @@ class SDO(object):
 
   def __repr__(self):
     return json.dumps(self.__dict__, sort_keys=True, indent=4, separators=(',', ': '))
+
+class AttackPattern(SDO):
+  type = 'attack-pattern'
+  def __init__(self, *args, **kwargs):
+    self.type = AttackPattern.type
+    super(AttackPattern, self).__init__(*args, **kwargs)
+    self.kill_chain_phases(kwargs.get('kill_chain_phases', None))
+
+  def kill_chain_phases(self, _kill_chain_phases):
+    self.set_attribute('kill_chain_phases', _kill_chain_phases, list, 'killchain')
 
 class Campaign(SDO):
   type = 'campaign'
@@ -448,7 +458,10 @@ class Bundle():
       self.objects = []
       if type(_objects) is list:
         for _object in _objects:
-          self.objects.append(_object.__dict__)
+          if type(_object) is dict:
+            self.objects.append(_object)
+          else:
+            self.objects.append(_object.__dict__)
       else:
         raise TypeError('[cobstix2] {_objects} is not a valid object list to be Bundled (required)'.format(_objects=repr(_objects)))
     except (TypeError), e:
@@ -483,49 +496,10 @@ def dict_to_obj(_dict):
         pass
   return None
 
-def query(value):
-  try:
-    query_type = settings('kb')['kb_type']
-  except KeyError:
-    print "[cobstix2] Could not read kb_type from kb settings in config.ini"
-    sys.exit(0)
-
-  if query_type == 'elk':
-    _index = USER
-    endpoint = ELK + '%s/_search' % _index
-    payload = '{"query":{"query_string":{"query": "%s"}}}' % value
-    try:
-      r = requests.post(endpoint, payload)
-      json_content = r.json()
-    except requests.exceptions.RequestException as e:
-      print e
-      return False
-    try:
-      hit_list = json_content['hits']['hits']
-      obj_list = []
-      for hit in hit_list:
-        new_obj = dict_to_obj(hit["_source"])
-        obj_list.append(new_obj)
-      return obj_list
-    except KeyError:
-      return False
-  else:
-    return False
-
-def put_elk(*_payloads):
-  results = []
-  for _payload in _payloads:
-    #print _payload
-    if isinstance(_payload, SDO) or isinstance(_payload, Bundle):
-      _index = USER
-      _type = _payload.type
-      _id = _payload.id.split('--')[1]
-    else:
-      return None
-    endpoint = ELK + '%s/%s/%s' % (_index, _type, _id)
-    try:
-      r = requests.put(endpoint, data=str(_payload))
-      results.append(r.content)
-    except requests.exceptions.RequestException as e:
-      print e
-  return results
+def file_to_obj(_filename):
+  # Imports stix objects from local fiule (eg: something.json)
+  with open(_filename, 'rb') as f:
+    raw = f.read()
+  obj_dict = ast.literal_eval(raw)
+  obj = dict_to_obj(obj_dict)
+  return obj

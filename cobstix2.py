@@ -1,7 +1,6 @@
 import sys
 import json
 from uuid import uuid4, uuid3, NAMESPACE_URL
-from hashlib import sha1
 import datetime
 from pprint import pprint
 import gc
@@ -44,11 +43,31 @@ def is_timestamp(timestamp):
     traceback.print_exc()
     sys.exit(0)
 
-def is_datamarking(datamarking):
-  return True
+def is_datamarking(object, granular_markings):
+  try:
+    for marking in granular_markings:
+      if type(marking) is not dict:
+        raise TypeError('[cobstix2] {marking} is not a valid input type; Expected dict.'.format(marking=repr(marking)))
+      else:
+        if is_id(marking['marking_ref']):
+          for selector in marking['selectors']:
+            datamarking_attribute = getattr(object, selector)
+    return True
+  except (TypeError, KeyError, AttributeError), e:
+    traceback.print_exc()
+    sys.exit(0)
 
-def is_killchain(killchain):
-  return True
+def is_killchain(killchains):
+  try:
+    for killchain in killchains:
+      if type(killchain) is not dict:
+        raise TypeError('[cobstix2] {killchain} is not a valid input type; Expected dict.'.format(killchain=repr(killchain)))
+      elif killchain['phase_name'] not in VOCABS['kill_chain'][killchain['kill_chain_name']]:
+          raise ValueError('[cobstix2] {killchain} contains non-vocab kill-chain data.'.format(killchain=repr(killchain)))
+    return True
+  except (TypeError, KeyError, AttributeError), e:
+    traceback.print_exc()
+    sys.exit(0)
 
 def is_relationship(relationship):
   relationship_type = relationship[0]
@@ -78,24 +97,21 @@ def is_timestamp(timestamp):
 
 def is_valid(input, _type, vocab_ref):
   try:
+    if type(input) is not _type:
+      raise TypeError('[cobstix2] {input} is not a valid input type {type}; Expected {_type}'.format(input=repr(input), type=repr(type(input)), _type=repr(_type)))
+
     if vocab_ref == 'timestamp':
       return is_timestamp(input)
 
     if vocab_ref == 'id':
       return is_id(input)
 
-    if vocab_ref == 'datamarking':
-      return is_datamarking(input)
-
     if vocab_ref == 'killchain':
       return is_killchain(input)
 
     if vocab_ref == 'relationship':
       return is_relationship(input)
-
-    if type(input) is not _type:
-      raise TypeError('[cobstix2] {input} is not a valid input type {type}; Expected {_type}'.format(input=repr(input), type=repr(type(input)), _type=repr(_type)))
-
+    
     if vocab_ref is not None:
       if type(input) is str:
         input = [input]
@@ -140,7 +156,10 @@ class SDO(object):
 
   def set_attribute(object, attribute, input, _type, vocab_ref=None, required=False):
     if input is not None:
-      if is_valid(input, _type, vocab_ref):
+      if vocab_ref == 'datamarking':
+        if is_datamarking(object, input):
+          setattr(object, attribute, input)
+      elif is_valid(input, _type, vocab_ref):
         setattr(object, attribute, input)
     else:
       if required:
@@ -182,14 +201,6 @@ class SDO(object):
 
   def granular_markings(self, _granular_markings):
     self.set_attribute('granular_markings', _granular_markings, list, 'datamarking')
-
-  def set_tlp(self, definition, selectors=None):
-    tlp_id = ns_uuid('marking-definition', definition)
-    if selectors is None:
-      self.object_marking_refs = [tlp_id]
-    else:
-      self.granular_markings = [{'marking_ref': tlp_id, 'selectors': selectors}]
-    return _tlp
 
   def __repr__(self):
     return json.dumps(self.__dict__, sort_keys=True, indent=4, separators=(',', ': '))
@@ -408,7 +419,7 @@ class Relationship(SDO):
 
   def set_relationship(self, _type, _source, _target):
     if _type is not None and _source is not None and _target is not None:
-      if is_valid([_type, _source, _target], _type, 'relationship'):
+      if is_valid([_type, _source, _target], list, 'relationship'):
         setattr(self, 'relationship_type', _type)
         setattr(self, 'source_ref', _source)
         setattr(self, 'target_ref', _target)
@@ -463,7 +474,7 @@ class TLPMarking(DataMarking):
     self.definition(kwargs.get('definition', None))
 
   def definition(self, _definition):
-    self.set_attribute('definition', _definition, dict, 'datamarking', True)
+    self.set_attribute('definition', _definition, dict, None, True)
 
 class Bundle():
   type = 'bundle'

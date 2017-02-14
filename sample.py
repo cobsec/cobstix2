@@ -29,7 +29,7 @@ def main():
   #report_list = []
   for sdo in all_sdo:
     if sdo.type != 'marking-definition' and sdo.type != 'identity' and sdo.type != 'malware':
-      sdo.object_marking_refs = [tlpamber.id]
+      sdo.object_marking_refs([tlpamber.id])
       #report_list.append(sdo.id)
 
   #rep = Report(name='[FoW] Basic FoW Example', object_refs=report_list)

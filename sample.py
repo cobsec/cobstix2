@@ -19,27 +19,27 @@ def main():
   #  TLP Marking
   #  Identity of creator
   
-  ind = Indicator(name='[EXAMPLE] PIVY Pre-exploitation Delivery Infrastructure targeting friendly victim', description='[EXAMPLE] Fake indicator generated to demonstrate stix2 object composition. In this example, PIVY infrastructure (1.2.3.4) has been observed attempting to make incoming connections to friendly IP address (2.3.4.5)', labels=['malicious-activity'], pattern="[network-traffic:dst_ref.type = 'ipv4-addr' AND network-traffic:dst_ref.value = '2.3.4.5' AND network-traffic:src_ref.value = '1.2.3.4']", kill_chain_phases=[{'kill_chain_name':'pre-post', 'phase_name':'pre-attack'}])
-  coa1 = CourseOfAction(name='[EXAMPLE] BLOCK Inbound Connections', description='[EXAMPLE] Where possible, deploy this indicator to network sensors, Intrusion Detection Systems and/or other protective monitoring devices to BLOCK outbound connections to infrastructure using this indicator pattern.')
-  coa2 = CourseOfAction(name='[EXAMPLE] REPORT Sightings to NCSC', description='[EXAMPLE] Should this Indicator be observed in connection to your network, please report the activity to NCSC using a STIX Sighting Object.')
-  mal = Malware(name='[EXAMPLE] Poison Ivy', kill_chain_phases=[{'kill_chain_name':'pre-post', 'phase_name':'pre-attack'}])
-  rel_ind_mal = Relationship('indicates', ind.id, mal.id)
-  rel_coa1_mal = Relationship('mitigates', coa1.id, mal.id)
-  rel_coa2_mal = Relationship('mitigates', coa2.id, mal.id)
+  ind = Indicator(name='[EXAMPLE] Malicious infrastructure IP address', description='[EXAMPLE] Fake indicator generated to demonstrate stix2 object composition for CTI Adapter sharing.', labels=['malicious-activity'], pattern="ipv4-addr:value = '1.2.3.4'", kill_chain_phases=[{'kill_chain_name':'pre-post', 'phase_name':'pre-attack'}])
+  coa = CourseOfAction(name='[EXAMPLE] REPORT Sightings to NCSC', description='[EXAMPLE] Should this Indicator be observed in connection to your network, please report the activity to NCSC using a STIX Sighting Object.')
+  atp = AttackPattern(name='[EXAMPLE] Pre-positioning of malicious infrastructure', kill_chain_phases=[{'kill_chain_name':'pre-post', 'phase_name':'pre-attack'}])
+  rel_ind_atp = Relationship('indicates', ind.id, atp.id)
+  rel_coa_atp = Relationship('mitigates', coa.id, atp.id)
   
   all_sdo = get_all_SDO()
-  report_list = []
+  #report_list = []
   for sdo in all_sdo:
     if sdo.type != 'marking-definition' and sdo.type != 'identity' and sdo.type != 'malware':
-      sdo.object_marking_refs = tlpamber.id
-      report_list.append(sdo.id)
+      sdo.object_marking_refs = [tlpamber.id]
+      #report_list.append(sdo.id)
 
-  rep = Report(name='[FoW] Basic FoW Example', object_refs=report_list)
-  all_sdo.append(rep)
-  bun = Bundle(objects=all_sdo)
+  #rep = Report(name='[FoW] Basic FoW Example', object_refs=report_list)
+  #all_sdo.append(rep)
+  bun = Bundle(objects=[ind, coa, atp, rel_coa_atp, rel_ind_atp])
 
-  with open('out.json', 'wb') as f:
-    f.write(str(bun))
+  #with open('out.json', 'wb') as f:
+    #f.write(str(bun))
+
+  print bun
 
 
 if __name__ == '__main__':

@@ -50,6 +50,21 @@ def is_datamarking(datamarking):
 def is_killchain(killchain):
   return True
 
+def is_relationship(relationship):
+  relationship_type = relationship[0]
+  source_ref = relationship[1]
+  target_ref = relationship[2]
+  source_type = source_ref.split('--')[0]
+  target_type = target_ref.split('--')[0]
+  try:
+    if is_id(source_ref) and is_id(target_ref) and target_type in VOCABS['relationship'][source_type][relationship_type]:
+      return True
+    else:
+      raise ValueError('[cobstix2] {relationship} is not a valid relationship construct'.format(relationship=repr(relationship)))
+  except (KeyError, ValueError), e:
+    traceback.print_exc()
+    sys.exit(0)
+
 def is_timestamp(timestamp):
   try:
     if re.match('\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?Z', timestamp):
@@ -74,6 +89,9 @@ def is_valid(input, _type, vocab_ref):
 
     if vocab_ref == 'killchain':
       return is_killchain(input)
+
+    if vocab_ref == 'relationship':
+      return is_relationship(input)
 
     if type(input) is not _type:
       raise TypeError('[cobstix2] {input} is not a valid input type {type}; Expected {_type}'.format(input=repr(input), type=repr(type(input)), _type=repr(_type)))
@@ -378,22 +396,24 @@ class Relationship(SDO):
     self.type = Relationship.type
     super(Relationship, self).__init__(*args, **kwargs)
     try:
-      if 'relationship_type' in kwargs:
-        self.relationship_type = kwargs.get('relationship_type')
+      if 'relationship_type' in kwargs and 'source_ref' in kwargs and 'target_ref' in kwargs:
+        self.set_relationship(kwargs.get('relationship_type', None), kwargs.get('source_ref', None), kwargs.get('target_ref', None))
+      elif len(args) > 2:
+        self.set_relationship(args[0], args[1], args[2])
       else:
-        self.relationship_type = args[0]
+        raise ValueError('[cobstix2] Relationship object requires Relationship(<relationship_type>, <source_ref>, <target_ref>) for initialisation.')
+    except ValueError:
+      traceback.print_exc()
+      sys.exit(0)
 
-      if 'source_ref' in kwargs:
-        self.source_ref = kwargs.get('source-ref')
-      else:
-        self.source_ref = args[1]
-
-      if 'target_ref' in kwargs:
-        self.target_ref = kwargs.get('target_ref')
-      else:
-        self.target_ref = args[2]
-    except IndexError:
-      raise IndexError('[cobstix2] Relationship object requires Relationship(<relationship_type>, <source_ref>, <target_ref>) for initialisation.')
+  def set_relationship(self, _type, _source, _target):
+    if _type is not None and _source is not None and _target is not None:
+      if is_valid([_type, _source, _target], _type, 'relationship'):
+        setattr(self, 'relationship_type', _type)
+        setattr(self, 'source_ref', _source)
+        setattr(self, 'target_ref', _target)
+    else:
+      err_required(self.type, 'relationship')
 
 class Sighting(SDO):
   type = 'sighting'

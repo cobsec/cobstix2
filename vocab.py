@@ -144,4 +144,98 @@ VOCABS = {
       'post-attack',
     ],
   },
+  'relationship' : {
+    'attack-pattern' : {
+      'targets' : [
+        'vulnerability',
+        'identity',
+      ],
+      'uses' : [
+        'malware',
+        'tool',
+      ],
+    },
+    'campaign' : {
+      'attributed-to' : [
+        'intrusion-set',
+        'threat-actor',
+      ],
+      'targets' : [
+        'identity',
+        'vulnerability',
+      ],
+      'uses' : [
+        'attack-pattern',
+        'malware',
+        'tool',
+      ],
+    },
+    'course-of-action' : {
+      'mitigates' : [
+        'attack-pattern',
+        'malware',
+        'tool',
+        'vulnerability',
+      ],
+    },
+    'indicator' : {
+      'indicates' : [
+        'attack-pattern',
+        'campaign',
+        'intrusion-set',
+        'malware',
+        'threat-actor',
+        'tool',
+      ],
+    },
+    'intrusion-set' : {
+      'attributed-to' : [
+        'threat-actor',
+      ],
+      'targets' : [
+        'identity',
+        'vulnerability',
+      ],
+      'uses' : [
+        'attack-pattern',
+        'malware',
+        'tool',
+      ],
+    },
+    'malware' : {
+      'targets' : [
+        'identity',
+        'vulnerability',
+      ],
+      'uses' : [
+        'tool',
+      ],
+      'variant-of' : [
+        'malware',
+      ],
+    },
+    'threat-actor' : {
+      'attributed-to' : [
+        'identity',
+      ],
+      'impersonates' : [
+        'identity',
+      ],
+      'targets' : [
+        'identity',
+        'vulnerability',
+      ],
+      'uses' : [
+        'attack-pattern',
+        'malware',
+        'tool',
+      ],
+    },
+    'tool' : {
+      'targets' : [
+        'identity',
+        'vulnerability',
+      ],
+    },
+  }
 }

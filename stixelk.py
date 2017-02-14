@@ -5,13 +5,13 @@ from config import settings
 
 def query(value):
   try:
-    query_type = USER
+    query_type = settings('kb')['kb_type']
   except KeyError:
     print "[cobstix2] Could not read kb_type from kb settings in config.ini"
     sys.exit(0)
 
   if query_type == 'elk':
-    _index = settings('stix')['created_by_ref']
+    _index = USER
     endpoint = ELK + '%s/_search' % _index
     payload = '{"query":{"query_string":{"query": "%s"}}}' % value
     try:

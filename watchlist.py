@@ -10,8 +10,8 @@ def main():
     ind = Indicator(name='[EXAMPLE] Malicious infrastructure IP address', description='[EXAMPLE] Fake indicator generated to demonstrate stix2 object composition for CTI Adapter sharing.', labels=['malicious-activity'], pattern="ipv4-addr:value = '" + str(randint(1,255)) + "." + str(randint(1,255)) + "." + str(randint(1,255)) + "." + str(randint(1,255)) + "'")
     indicators.append(ind)
     ind_ids.append(ind.id)
+  rep = Report(name='[EXAMPLE] Indicator watchlist for CTI Log Adapter', object_refs=ind_ids)
   indicators.append(rep)
-  rep = Report(name='[EXAMPLE] Indicator watchlist for CTI Adapter', object_refs=ind_ids)
 
   bun = Bundle(objects=indicators)
   print bun

@@ -5,6 +5,22 @@ An experimental python library implementing the STIX 2.0 spec as python objects 
 
 :Spec: http://stixproject.github.io/stix2.0/
 
+File list:
+ - cobstix2: Core stix2 implementation
+ - cobbox: Core cybox2 implementation
+ - common_tools: Shared functions for manipulating stix objects
+ - vocab: Set vocabs for use in stix object construction (mostly open-vocab)
+ - stixelk: Some functions to interact with an elk stack to push stix2 objects to a knowledge base
+ - config.py/.ini: Basic config management
+Sample scripts:
+ - grizzlysteppe: [BROKEN] Implementation of GS report (US-CERT) in stix2. Need supdating for new API bindings
+ - test: Generic testing ground for trying out the libraries
+ - ingest: Using the cobstix2 library to ingest stix2 objects
+ - sample: CTI Adapter object production example
+ - watchlist: Generating 'watchlist' report objects using the stix2 libraries
+ - stix221: VERY SPECIFIC implementation for downgrading a specific instance of stix2 objects to stix1 (not a generic translator, just for a specific use case)
+
+
 Major Update with commit: 7639f77151a13a26cfb151c54adcaede544f18d9
  - Starting to update towards RC4 spec, primarily SDO parent and Indicator objects (main targets of below updates too...other objects tfo)
  - Validation checking on initialisation for spec requirements (eg: labels mandatory on certain objects, patterns on Indicators, etc)

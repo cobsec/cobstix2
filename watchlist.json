@@ -1,0 +1,340 @@
+{
+    "id": "bundle--f0a04e1a-2774-48f5-86c6-b9b6f794a3ed",
+    "objects": [
+        {
+            "created": "2017-02-23T11:22:58.528000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--e495720c-2afb-47b6-bc5e-4f7ccb892fce",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.528000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '137.9.136.108'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.528000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.542000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--7581cac1-cd20-404f-9498-5214e8ea4b1c",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.542000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '196.18.226.100'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.542000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.542000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--311dae24-29e5-4072-81fe-8bccf110acbd",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.542000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '197.75.43.58'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.542000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.543000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--49a3436f-64fa-42a4-a1de-f003d84c9d36",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.543000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '47.23.124.234'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.543000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.544000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--5440217e-8d67-4062-99a7-e4ccf13067a6",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.544000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '55.80.68.150'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.544000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.545000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--c67e779c-626b-44fb-a699-ddf480c285fd",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.545000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '224.33.193.88'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.545000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.546000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--5f970e84-8058-43f7-b954-e9597eefcc80",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.546000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '171.203.184.77'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.546000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.546000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--57098822-2e17-47bb-81f5-449f206a3a09",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.546000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '117.29.56.137'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.546000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.547000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--5c1a148f-5166-4200-bb24-062cf552c7bb",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.547000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '58.231.130.100'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.547000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.548000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--afd0335e-04a9-4b24-ac8c-a530940239cf",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.548000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '149.42.93.119'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.548000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.549000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--01b19de0-0054-40db-ac07-bfea7954e221",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.549000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '228.130.112.134'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.549000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.550000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--afff1710-60af-4130-b106-27e68e9e19f2",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.550000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '30.158.145.196'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.550000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.551000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--1ea51112-2135-4c3a-9205-69f167c24b1c",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.551000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '15.105.173.223'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.551000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.551000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--7eb30099-40b5-42be-bf44-f2bcb1e049e9",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.551000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '70.225.26.65'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.551000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.552000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--4252a5d6-6a06-4795-ae39-6e1444e4eb1c",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.552000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '228.187.106.55'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.552000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.553000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--4f0a388d-3fb1-4af9-9877-e207f0f59c37",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.553000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '209.41.197.31'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.553000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.554000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--feb93c9f-76ae-4005-9d4b-368dd560ef99",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.554000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '199.66.28.9'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.554000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.555000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--b16781d4-467a-44bc-a44f-78b947a3870f",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.555000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '145.5.37.125'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.555000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.555000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--78bcf67a-6373-41fa-9031-e071df92b103",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.555000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '205.32.39.203'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.555000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.556000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
+            "id": "indicator--e69bc3d6-aadf-48f9-8286-5e9bc1397219",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-02-23T11:22:58.556000Z",
+            "name": "[EXAMPLE] Malicious infrastructure IP address",
+            "pattern": "ipv4-addr:value = '197.21.67.128'",
+            "type": "indicator",
+            "valid_from": "2017-02-23T11:22:58.556000Z"
+        },
+        {
+            "created": "2017-02-23T11:22:58.557000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "report--c7f2b5f4-1eec-4425-97c2-4dc4bfe13d56",
+            "labels": [
+                "threat-report"
+            ],
+            "modified": "2017-02-23T11:22:58.557000Z",
+            "name": "[EXAMPLE] Indicator watchlist for CTI Log Adapter",
+            "object_refs": [
+                "indicator--e495720c-2afb-47b6-bc5e-4f7ccb892fce",
+                "indicator--7581cac1-cd20-404f-9498-5214e8ea4b1c",
+                "indicator--311dae24-29e5-4072-81fe-8bccf110acbd",
+                "indicator--49a3436f-64fa-42a4-a1de-f003d84c9d36",
+                "indicator--5440217e-8d67-4062-99a7-e4ccf13067a6",
+                "indicator--c67e779c-626b-44fb-a699-ddf480c285fd",
+                "indicator--5f970e84-8058-43f7-b954-e9597eefcc80",
+                "indicator--57098822-2e17-47bb-81f5-449f206a3a09",
+                "indicator--5c1a148f-5166-4200-bb24-062cf552c7bb",
+                "indicator--afd0335e-04a9-4b24-ac8c-a530940239cf",
+                "indicator--01b19de0-0054-40db-ac07-bfea7954e221",
+                "indicator--afff1710-60af-4130-b106-27e68e9e19f2",
+                "indicator--1ea51112-2135-4c3a-9205-69f167c24b1c",
+                "indicator--7eb30099-40b5-42be-bf44-f2bcb1e049e9",
+                "indicator--4252a5d6-6a06-4795-ae39-6e1444e4eb1c",
+                "indicator--4f0a388d-3fb1-4af9-9877-e207f0f59c37",
+                "indicator--feb93c9f-76ae-4005-9d4b-368dd560ef99",
+                "indicator--b16781d4-467a-44bc-a44f-78b947a3870f",
+                "indicator--78bcf67a-6373-41fa-9031-e071df92b103",
+                "indicator--e69bc3d6-aadf-48f9-8286-5e9bc1397219"
+            ],
+            "published": "2017-02-23T11:22:58.558000Z",
+            "type": "report"
+        },
+        {
+            "created": "2017-02-23T11:22:58.558000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "description": "[EXAMPLE] Report objects related-to this CoA are candidates for CTI Adapter sharing",
+            "id": "course-of-action--b49904cf-da21-4237-aa62-74c659dbf72b",
+            "modified": "2017-02-23T11:22:58.558000Z",
+            "name": "[EXAMPLE] CTI Adapter - VERIFY",
+            "type": "course-of-action"
+        },
+        {
+            "created": "2017-02-23T11:22:58.558000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--e5ed8fc2-3a36-4e65-bba4-3cd723dff526",
+            "modified": "2017-02-23T11:22:58.558000Z",
+            "relationship_type": "related-to",
+            "source_ref": "report--c7f2b5f4-1eec-4425-97c2-4dc4bfe13d56",
+            "target_ref": "course-of-action--b49904cf-da21-4237-aa62-74c659dbf72b",
+            "type": "relationship"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

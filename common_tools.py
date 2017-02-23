@@ -74,9 +74,15 @@ def is_relationship(relationship):
       return True
     else:
       raise ValueError('[cobstix2] {relationship} is not a valid relationship construct'.format(relationship=repr(relationship)))
-  except (KeyError, ValueError), e:
+  except ValueError:
     traceback.print_exc()
     sys.exit(0)
+  except KeyError:
+    if relationship_type in VOCABS['relationship']['common']:
+      return True
+    else:
+      traceback.print_exc()
+      sys.exit(0)
 
 def is_cybox_object(object):
   return True

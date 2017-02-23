@@ -119,7 +119,7 @@ VOCABS = {
       'revenge',
       'unpredictable',
     ],
-    'threat-actor-sophistication-ov' : [
+    'threat-actor-sophistication' : [
       'none',
       'minimal',
       'intermediate',
@@ -128,7 +128,7 @@ VOCABS = {
       'innovator',
       'strategic',
     ],
-    'threat-actor-role-ov' : [
+    'threat-actor-role' : [
       'agent',
       'director',
       'independent',
@@ -145,6 +145,11 @@ VOCABS = {
     ],
   },
   'relationship' : {
+    'common' : [
+        'duplicate-of',
+        'derived-from',
+        'related-to',
+    ],
     'attack-pattern' : {
       'targets' : [
         'vulnerability',

@@ -1,0 +1,92 @@
+{
+    "id": "bundle--c008f0ab-890f-4f9d-bcb3-be9d3e54b1fb",
+    "objects": [
+        {
+            "created": "2017-02-23T12:27:04.689000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "first_observed": "2017-01-18T08:13:43.565000Z",
+            "id": "observed-data--a5947cae-0fb8-4b6a-8f63-009f8517e2ae",
+            "last_obseved": "2017-01-18T08:13:43.565000Z",
+            "modified": "2017-02-23T12:27:04.689000Z",
+            "name": "CTI Adapter log entry data",
+            "number_observed": 1,
+            "objects": {
+                "0": {
+                    "type": "ipv4-addr",
+                    "value": "1.3.3.7"
+                },
+                "1": {
+                    "type": "ipv4-addr",
+                    "value": "8.0.4.7"
+                },
+                "2": {
+                    "dst_ref": 1,
+                    "protocols": [
+                        "tcp",
+                        "ipv4",
+                        "http"
+                    ],
+                    "src_ref": 0,
+                    "type": "network-traffic"
+                }
+            },
+            "type": "observed-data"
+        },
+        {
+            "count": 1,
+            "created": "2017-02-23T12:27:04.688000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "first_seen": "2017-01-18T08:13:43.565000Z",
+            "id": "sighting--d2c39253-a0c6-4d73-abd1-d0ba694434af",
+            "modified": "2017-02-23T12:27:04.688000Z",
+            "name": "CTI Adapter Sighting Response",
+            "observed_data_refs": [
+                "observed-data--a5947cae-0fb8-4b6a-8f63-009f8517e2ae"
+            ],
+            "sighting_of_ref": "indicator--802fe907-5006-4554-9ecd-cabb9f00ddd6",
+            "type": "sighting"
+        },
+        {
+            "count": 0,
+            "created": "2017-02-23T12:27:04.691000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "sighting--dd0620c6-074b-46e3-9558-4c4cc1222f0e",
+            "modified": "2017-02-23T12:27:04.691000Z",
+            "name": "CTI Adapter Sighting Response",
+            "sighting_of_ref": "indicator--cbea8cba-74cc-4db3-8345-ce3bb84fd6bf",
+            "type": "sighting"
+        },
+        {
+            "count": 0,
+            "created": "2017-02-23T12:27:04.693000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "sighting--111d6a3c-68b0-48e2-b435-a0e53c9c70c2",
+            "modified": "2017-02-23T12:27:04.693000Z",
+            "name": "CTI Adapter Sighting Response",
+            "sighting_of_ref": "indicator--78361287-5f45-4814-ab2d-947b3f626c48",
+            "type": "sighting"
+        },
+        {
+            "count": 0,
+            "created": "2017-02-23T12:27:04.695000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "sighting--0f90a53f-ad11-4745-8245-4fa602efcd79",
+            "modified": "2017-02-23T12:27:04.695000Z",
+            "name": "CTI Adapter Sighting Response",
+            "sighting_of_ref": "indicator--128b14cd-af37-4c08-9857-0da57a890b51",
+            "type": "sighting"
+        },
+        {
+            "count": 0,
+            "created": "2017-02-23T12:27:04.697000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "sighting--9dad4be4-8fdd-44b7-9bb8-19cd14a43230",
+            "modified": "2017-02-23T12:27:04.697000Z",
+            "name": "CTI Adapter Sighting Response",
+            "sighting_of_ref": "indicator--eb534364-97bf-4f73-96eb-8f6a6401c93b",
+            "type": "sighting"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

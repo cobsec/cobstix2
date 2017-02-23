@@ -1,0 +1,58 @@
+{
+    "id": "bundle--48d6be7c-bfdc-4d5e-a80b-0b6a66bee196",
+    "objects": [
+        {
+            "count": 1,
+            "created": "2017-02-23T12:27:04.666000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "first_seen": "2017-01-18T08:13:43.565000Z",
+            "id": "sighting--82e0a299-7aad-4e2f-8bb9-00afd665936e",
+            "modified": "2017-02-23T12:27:04.666000Z",
+            "name": "CTI Adapter Sighting Response",
+            "sighting_of_ref": "indicator--802fe907-5006-4554-9ecd-cabb9f00ddd6",
+            "type": "sighting"
+        },
+        {
+            "count": 0,
+            "created": "2017-02-23T12:27:04.668000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "sighting--c12d1804-245f-4ff7-944b-e26146369236",
+            "modified": "2017-02-23T12:27:04.668000Z",
+            "name": "CTI Adapter Sighting Response",
+            "sighting_of_ref": "indicator--cbea8cba-74cc-4db3-8345-ce3bb84fd6bf",
+            "type": "sighting"
+        },
+        {
+            "count": 0,
+            "created": "2017-02-23T12:27:04.670000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "sighting--f7c48b26-ba17-48bb-a848-ea96f28943c3",
+            "modified": "2017-02-23T12:27:04.670000Z",
+            "name": "CTI Adapter Sighting Response",
+            "sighting_of_ref": "indicator--78361287-5f45-4814-ab2d-947b3f626c48",
+            "type": "sighting"
+        },
+        {
+            "count": 0,
+            "created": "2017-02-23T12:27:04.672000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "sighting--2d63a4b9-d00d-49a6-8218-661fb0ebd322",
+            "modified": "2017-02-23T12:27:04.672000Z",
+            "name": "CTI Adapter Sighting Response",
+            "sighting_of_ref": "indicator--128b14cd-af37-4c08-9857-0da57a890b51",
+            "type": "sighting"
+        },
+        {
+            "count": 0,
+            "created": "2017-02-23T12:27:04.673000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "sighting--1d9132ee-3967-4738-b16c-81ed20febbe5",
+            "modified": "2017-02-23T12:27:04.673000Z",
+            "name": "CTI Adapter Sighting Response",
+            "sighting_of_ref": "indicator--eb534364-97bf-4f73-96eb-8f6a6401c93b",
+            "type": "sighting"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

@@ -234,6 +234,28 @@ class Malware(SDO):
   def kill_chain_phases(self, _kill_chain_phases):
     self.set_attribute('kill_chain_phases', _kill_chain_phases, list, 'killchain')
 
+class ObservedData(SDO):
+  type = 'observed-data'
+  def __init__(self, *args, **kwargs):
+    self.type = ObservedData.type
+    super(ObservedData, self).__init__(*args, **kwargs)
+    self.first_observed(kwargs.get('first_observed', None))
+    self.last_obseved(kwargs.get('last_obseved', self.first_observed))
+    self.number_observed(kwargs.get('number_observed', None))
+    self.objects(kwargs.get('objects', None))
+
+  def first_observed(self, _first_observed):
+    self.set_attribute('first_observed', _first_observed, str, 'timestamp', True)
+
+  def last_obseved(self, _last_obseved):
+    self.set_attribute('last_obseved', _last_obseved, str, 'timestamp', True)
+
+  def number_observed(self, _number_observed):
+    self.set_attribute('number_observed', _number_observed, int, None, True)
+
+  def objects(self, _objects):
+    self.set_attribute('objects', _objects, dict, None, True)
+
 class Report(SDO):
   type = 'report'
   def __init__(self, *args, **kwargs):
@@ -362,7 +384,7 @@ class Sighting(SDO):
     self.set_attribute('count', _where_sighted_refs, list)
 
   def summary(self, _summary):
-    self.set_attribute('count', _summary)
+    self.set_attribute('count', _summary, bool)
 
 class DataMarking(SDO):
   type = 'marking-definition'

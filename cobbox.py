@@ -174,3 +174,17 @@ class Container(object):
 
   def __repr__(self):
     return json.dumps(self.__dict__, sort_keys=True, indent=4, separators=(',', ': '))
+
+def create_network_traffic_object(protocols, src_ip, dst_ip):
+
+  src_ip_obj = IPv4Address(value=src_ip)
+  dst_ip_obj = IPv4Address(value=dst_ip)
+
+  container = Container()
+  src_ip_ref = container.add_object(src_ip_obj)
+  dst_ip_ref = container.add_object(dst_ip_obj)
+  net_traffic_obj = NetworkTraffic(protocols=protocols)
+  net_traffic_obj.src_ref = src_ip_ref
+  net_traffic_obj.dst_ref = dst_ip_ref
+  count = container.add_object(net_traffic_obj)
+  return container

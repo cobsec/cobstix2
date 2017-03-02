@@ -27,6 +27,28 @@ class Cybox(object):
   def __repr__(self):
     return json.dumps(self.__dict__, sort_keys=True, indent=4, separators=(',', ': '))
 
+class Artifact(Cybox):
+  type = 'artifact'
+  def __init__(self, *args, **kwargs):
+    self.type = Artifact.type
+    super(Artifact, self).__init__(*args, **kwargs)
+    self.mime_type(kwargs.get('mime_type', None))
+    self.payload_bin(kwargs.get('payload_bin', None))
+    self.url(kwargs.get('url', None))
+    self.hashes(kwargs.get('hashes', None))
+
+  def mime_type(self, _mime_type):
+    self.set_attribute('mime_type', _mime_type, str)
+
+  def payload_bin(self, _payload_bin):
+    self.set_attribute('payload_bin', _payload_bin, str)
+
+  def url(self, _url):
+    self.set_attribute('url', _url, str)
+
+  def hashes(self, _hashes):
+    self.set_attribute('hashes', _hashes, dict)
+
 class ASObject(Cybox):
   type = 'autonomous-system'
   def __init__(self, *args, **kwargs):
@@ -45,6 +67,36 @@ class ASObject(Cybox):
   def rir(self, _rir):
     self.set_attribute('rir', _rir, str)
 
+class DomainName(Cybox):
+  type = 'domain-name'
+  def __init__(self, *args, **kwargs):
+    self.type = DomainName.type
+    super(DomainName, self).__init__(*args, **kwargs)
+    self.value(kwargs.get('value', None))
+    self.resolves_to_refs(kwargs.get('resolves_to_refs', None))
+
+  def value(self, _value):
+    self.set_attribute('value', _value, str, None, True)
+
+  def resolves_to_refs(self, _resolves_to_refs):
+    self.set_attribute('resolves_to_refs', _resolves_to_refs, list, 'cybox-object-refs')
+
+class EmailAddress(Cybox):
+  type = 'email-addr'
+  def __init__(self, *args, **kwargs):
+    self.type = EmailAddress.type
+    super(EmailAddress, self).__init__(*args, **kwargs)
+
+  def value(self, _value):
+    self.set_attribute('value', _value, str, None, True)
+
+  def display_name(self, _display_name):
+    self.set_attribute('display_name', _display_name, str)
+
+  def belongs_to_ref(self, _belongs_to_ref):
+    self.set_attribute('belongs_to_ref', _belongs_to_ref, list, 'cybox-object-refs')
+    
+
 class IPv4Address(Cybox):
   type = 'ipv4-addr'
   def __init__(self, *args, **kwargs):
@@ -62,6 +114,34 @@ class IPv4Address(Cybox):
 
   def belongs_to_refs(self, _belongs_to_refs):
     self.set_attribute('resolves_to_refs', _belongs_to_refs, list, 'cybox-object-refs')
+
+class IPv6Address(Cybox):
+  type = 'ipv6-addr'
+  def __init__(self, *args, **kwargs):
+    self.type = IPv6Address.type
+    super(IPv6Address, self).__init__(*args, **kwargs)
+    self.value(kwargs.get('value', None))
+    self.resolves_to_refs(kwargs.get('resolves_to_refs', None))
+    self.belongs_to_refs(kwargs.get('belongs_to_refs', None))
+  
+  def value(self, _value):
+    self.set_attribute('value', _value, str, None, True)
+
+  def resolves_to_refs(self, _resolves_to_refs):
+    self.set_attribute('resolves_to_refs', _resolves_to_refs, list, 'cybox-object-refs')
+
+  def belongs_to_refs(self, _belongs_to_refs):
+    self.set_attribute('resolves_to_refs', _belongs_to_refs, list, 'cybox-object-refs')
+
+class MACAddress(Cybox):
+  type = 'mac-addr'
+  def __init__(self, *args, **kwargs):
+    self.type = MACAddress.type
+    super(MACAddress, self).__init__(*args, **kwargs)
+    self.value(kwargs.get('value', None))
+  
+  def value(self, _value):
+    self.set_attribute('value', _value, str, None, True)
 
 class NetworkTraffic(Cybox):
   type = 'network-traffic'
@@ -136,6 +216,74 @@ class NetworkTraffic(Cybox):
 
   def encapsulated_by_ref(self, _encapsulated_by_ref):
     self.set_attribute('encapsulated_by_ref', _encapsulated_by_ref, str, 'cybox-object-refs')
+
+class URL(Cybox):
+  type = 'url'
+  def __init__(self, *args, **kwargs):
+    self.type = URL.type
+    super(URL, self).__init__(*args, **kwargs)
+    self.value(kwargs.get('value', None))
+  
+  def value(self, _value):
+    self.set_attribute('value', _value, str, None, True)
+
+class UserAccount(Cybox):
+  type = 'user-account'
+  def __init__(self, *args, **kwargs):
+    self.type = UserAccount.type
+    super(UserAccount, self).__init__(*args, **kwargs)
+    self.user_id(kwargs.get('user_id', None))
+    self.account_login(kwargs.get('account_login', None))
+    self.account_type(kwargs.get('account_type', None))
+    self.display_name(kwargs.get('display_name', None))
+    self.is_service_account(kwargs.get('is_service_account', None))
+    self.is_privileged(kwargs.get('is_privileged', None))
+    self.can_escalate_privs(kwargs.get('can_escalate_privs', None))
+    self.is_disabled(kwargs.get('is_disabled', None))
+    self.account_created(kwargs.get('account_created', None))
+    self.account_expires(kwargs.get('account_expires', None))
+    self.password_last_changed(kwargs.get('password_last_changed', None))
+    self.account_first_login(kwargs.get('account_first_login', None))
+    self.account_last_login(kwargs.get('account_last_login', None))
+
+  def user_id(self, _user_id):
+    self.set_attribute('user_id', _user_id, str, None, True)
+
+  def account_login(self, _account_login):
+    self.set_attribute('account_login', _account_login, str)
+
+  def account_type(self, _account_type):
+    self.set_attribute('account_type', _account_type, str, 'account-type-ov')
+
+  def display_name(self, _display_name):
+    self.set_attribute('display_name', _display_name, str)
+
+  def is_service_account(self, _is_service_account):
+    self.set_attribute('is_service_account', _is_service_account, bool)
+
+  def is_privileged(self, _is_privileged):
+    self.set_attribute('is_privileged', _is_privileged, bool)
+
+  def can_escalate_privs(self, _can_escalate_privs):
+    self.set_attribute('can_escalate_privs', _can_escalate_privs, bool)
+
+  def is_disabled(self, _is_disabled):
+    self.set_attribute('is_disabled', _is_disabled, bool)
+
+  def account_created(self, _account_created):
+    self.set_attribute('account_created', _account_created, str, 'timestamp')
+
+  def account_expires(self, _account_expires):
+    self.set_attribute('account_expires', _account_expires, str, 'timestamp')
+
+  def password_last_changed(self, _password_last_changed):
+    self.set_attribute('password_last_changed', _password_last_changed, str, 'timestamp')
+
+  def account_first_login(self, _account_first_login):
+    self.set_attribute('account_first_login', _account_first_login, str, 'timestamp')
+
+  def account_last_login(self, _account_last_login):
+    self.set_attribute('account_last_login', _account_last_login, str, 'timestamp')
 
 class Container(object):
   def __init__(self, *args, **kwargs):

@@ -9,6 +9,9 @@ def main():
 
   net_traff_ref = max(net_traff_dict, key=int)
   print net_traff_dict[str(net_traff_ref)]
+
+  domain = DomainName(value='badguy.com')
+  print domain
   
 
 

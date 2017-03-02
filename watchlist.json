@@ -1,112 +1,112 @@
 {
-    "id": "bundle--47981b25-a51f-4e54-9a43-296f08e7fbf0",
+    "id": "bundle--e6ce3651-a1e4-4b9e-bd2c-cde84c58e615",
     "objects": [
         {
-            "created": "2017-02-23T12:27:04.615000Z",
+            "created": "2017-03-01T15:52:00.516000Z",
             "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
             "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
-            "id": "indicator--802fe907-5006-4554-9ecd-cabb9f00ddd6",
+            "id": "indicator--dd37986b-ebda-43db-bd21-94a7d6f97c0a",
             "labels": [
                 "malicious-activity"
             ],
-            "modified": "2017-02-23T12:27:04.615000Z",
+            "modified": "2017-03-01T15:52:00.516000Z",
             "name": "[EXAMPLE] Malicious infrastructure IP address",
             "pattern": "ipv4-addr:value = '1.3.3.7'",
             "type": "indicator",
-            "valid_from": "2017-02-23T12:27:04.615000Z"
+            "valid_from": "2017-03-01T15:52:00.516000Z"
         },
         {
-            "created": "2017-02-23T12:27:04.631000Z",
+            "created": "2017-03-01T15:52:00.529000Z",
             "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
             "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
-            "id": "indicator--cbea8cba-74cc-4db3-8345-ce3bb84fd6bf",
+            "id": "indicator--4206bc62-e90d-4885-8730-246dd7002627",
             "labels": [
                 "malicious-activity"
             ],
-            "modified": "2017-02-23T12:27:04.631000Z",
+            "modified": "2017-03-01T15:52:00.529000Z",
             "name": "[EXAMPLE] Malicious infrastructure IP address",
-            "pattern": "ipv4-addr:value = '75.229.165.238'",
+            "pattern": "ipv4-addr:value = '43.114.78.31'",
             "type": "indicator",
-            "valid_from": "2017-02-23T12:27:04.631000Z"
+            "valid_from": "2017-03-01T15:52:00.529000Z"
         },
         {
-            "created": "2017-02-23T12:27:04.632000Z",
+            "created": "2017-03-01T15:52:00.530000Z",
             "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
             "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
-            "id": "indicator--78361287-5f45-4814-ab2d-947b3f626c48",
+            "id": "indicator--9b300865-545e-40f6-9440-f95600903754",
             "labels": [
                 "malicious-activity"
             ],
-            "modified": "2017-02-23T12:27:04.632000Z",
+            "modified": "2017-03-01T15:52:00.530000Z",
             "name": "[EXAMPLE] Malicious infrastructure IP address",
-            "pattern": "ipv4-addr:value = '23.158.140.76'",
+            "pattern": "ipv4-addr:value = '170.255.21.72'",
             "type": "indicator",
-            "valid_from": "2017-02-23T12:27:04.632000Z"
+            "valid_from": "2017-03-01T15:52:00.530000Z"
         },
         {
-            "created": "2017-02-23T12:27:04.633000Z",
+            "created": "2017-03-01T15:52:00.531000Z",
             "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
             "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
-            "id": "indicator--128b14cd-af37-4c08-9857-0da57a890b51",
+            "id": "indicator--9831d975-7547-4d11-a422-5b7af8f10592",
             "labels": [
                 "malicious-activity"
             ],
-            "modified": "2017-02-23T12:27:04.633000Z",
+            "modified": "2017-03-01T15:52:00.531000Z",
             "name": "[EXAMPLE] Malicious infrastructure IP address",
-            "pattern": "ipv4-addr:value = '84.178.115.41'",
+            "pattern": "ipv4-addr:value = '109.9.82.53'",
             "type": "indicator",
-            "valid_from": "2017-02-23T12:27:04.633000Z"
+            "valid_from": "2017-03-01T15:52:00.531000Z"
         },
         {
-            "created": "2017-02-23T12:27:04.634000Z",
+            "created": "2017-03-01T15:52:00.531000Z",
             "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
             "description": "[EXAMPLE] Fake, randomly generated indicator to demonstrate stix2 object composition for CTI Adapter sharing.",
-            "id": "indicator--eb534364-97bf-4f73-96eb-8f6a6401c93b",
+            "id": "indicator--12a7b666-a4e8-462f-b7b3-213a0e173907",
             "labels": [
                 "malicious-activity"
             ],
-            "modified": "2017-02-23T12:27:04.634000Z",
+            "modified": "2017-03-01T15:52:00.531000Z",
             "name": "[EXAMPLE] Malicious infrastructure IP address",
-            "pattern": "ipv4-addr:value = '70.213.92.138'",
+            "pattern": "ipv4-addr:value = '132.109.206.156'",
             "type": "indicator",
-            "valid_from": "2017-02-23T12:27:04.634000Z"
+            "valid_from": "2017-03-01T15:52:00.531000Z"
         },
         {
-            "created": "2017-02-23T12:27:04.635000Z",
+            "created": "2017-03-01T15:52:00.532000Z",
             "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
-            "id": "report--b871a255-c4a8-4f6a-88a9-0012f05cf21f",
+            "id": "report--03f1eb8d-30db-4d84-8c67-2dcf4ac6a310",
             "labels": [
                 "threat-report"
             ],
-            "modified": "2017-02-23T12:27:04.635000Z",
+            "modified": "2017-03-01T15:52:00.532000Z",
             "name": "[EXAMPLE] Indicator watchlist for CTI Log Adapter",
             "object_refs": [
-                "indicator--802fe907-5006-4554-9ecd-cabb9f00ddd6",
-                "indicator--cbea8cba-74cc-4db3-8345-ce3bb84fd6bf",
-                "indicator--78361287-5f45-4814-ab2d-947b3f626c48",
-                "indicator--128b14cd-af37-4c08-9857-0da57a890b51",
-                "indicator--eb534364-97bf-4f73-96eb-8f6a6401c93b"
+                "indicator--dd37986b-ebda-43db-bd21-94a7d6f97c0a",
+                "indicator--4206bc62-e90d-4885-8730-246dd7002627",
+                "indicator--9b300865-545e-40f6-9440-f95600903754",
+                "indicator--9831d975-7547-4d11-a422-5b7af8f10592",
+                "indicator--12a7b666-a4e8-462f-b7b3-213a0e173907"
             ],
-            "published": "2017-02-23T12:27:04.635000Z",
+            "published": "2017-03-01T15:52:00.533000Z",
             "type": "report"
         },
         {
-            "created": "2017-02-23T12:27:04.635000Z",
+            "created": "2017-03-01T15:52:00.533000Z",
             "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
             "description": "[EXAMPLE] Report objects related-to this CoA are candidates for CTI Adapter sharing",
-            "id": "course-of-action--a90cb497-b757-4f2d-9c87-5cb208e00cb9",
-            "modified": "2017-02-23T12:27:04.635000Z",
+            "id": "course-of-action--9c9c8824-50f2-479c-a69a-9f221727d977",
+            "modified": "2017-03-01T15:52:00.533000Z",
             "name": "[EXAMPLE] CTI Adapter - VERIFY",
             "type": "course-of-action"
         },
         {
-            "created": "2017-02-23T12:27:04.636000Z",
+            "created": "2017-03-01T15:52:00.533000Z",
             "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
-            "id": "relationship--30a0b0d7-b753-415d-9573-e1eafd7b89ea",
-            "modified": "2017-02-23T12:27:04.636000Z",
+            "id": "relationship--54126513-b6c9-475b-a3d0-c50f922d15d3",
+            "modified": "2017-03-01T15:52:00.533000Z",
             "relationship_type": "related-to",
-            "source_ref": "report--b871a255-c4a8-4f6a-88a9-0012f05cf21f",
-            "target_ref": "course-of-action--a90cb497-b757-4f2d-9c87-5cb208e00cb9",
+            "source_ref": "report--03f1eb8d-30db-4d84-8c67-2dcf4ac6a310",
+            "target_ref": "course-of-action--9c9c8824-50f2-479c-a69a-9f221727d977",
             "type": "relationship"
         }
     ],

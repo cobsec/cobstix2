@@ -121,6 +121,9 @@ def is_valid(input, _type, vocab_ref):
 
       if vocab_ref == 'cybox-object':
         return is_cybox_object(input)
+
+      if vocab_ref == 'windows-registry-datatype-enum':
+        return True
     
       if type(input) is str:
         input = [input]

@@ -12,8 +12,12 @@ def main():
 
   domain = DomainName(value='badguy.com')
   print domain
-  
 
+  win_key = WindowsRegistryKey(key='some_key')
+  print win_key
+  win_key.add_registry_value('value_name', '42', 'REG_QWORD')
+  print win_key
+ 
 
 
 if __name__ == '__main__':

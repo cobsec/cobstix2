@@ -67,6 +67,36 @@ class ASObject(Cybox):
   def rir(self, _rir):
     self.set_attribute('rir', _rir, str)
 
+class Directory(Cybox):
+  type = 'directory'
+  def __init__(self, *args, **kwargs):
+    self.type = Directory.type
+    super(Directory, self).__init__(*args, **kwargs)
+    self.path(kwargs.get('path', None))
+    self.path_enc(kwargs.get('path_enc', None))
+    self.created(kwargs.get('created', None))
+    self.modified(kwargs.get('modified', None))
+    self.accessed(kwargs.get('accessed', None))
+    self.contains_refs(kwargs.get('contains_refs', None))
+
+  def path(self, _path):
+    self.set_attribute('path', _path, str, None, True)
+
+  def path_enc(self, _path_enc):
+    self.set_attribute('path_enc', _path_enc, str)
+
+  def created(self, _created):
+    self.set_attribute('created', _created, str, 'timestamp')
+
+  def modified(self, _modified):
+    self.set_attribute('modified', _modified, str, 'timestamp')
+
+  def accessed(self, _accessed):
+    self.set_attribute('accessed', _accessed, str, 'timestamp')
+
+  def contains_refs(self, _contains_refs):
+    self.set_attribute('contains_refs', _contains_refs, list, 'cybox-object-refs')
+
 class DomainName(Cybox):
   type = 'domain-name'
   def __init__(self, *args, **kwargs):
@@ -142,6 +172,16 @@ class MACAddress(Cybox):
   
   def value(self, _value):
     self.set_attribute('value', _value, str, None, True)
+
+class Mutex(Cybox):
+  type = 'mutex'
+  def __init__(self, *args, **kwargs):
+    self.type = Mutex.type
+    super(Mutex, self).__init__(*args, **kwargs)
+    self.name(kwargs.get('name', None))
+  
+  def name(self, _name):
+    self.set_attribute('name', _name, str, None, True)
 
 class NetworkTraffic(Cybox):
   type = 'network-traffic'
@@ -284,6 +324,54 @@ class UserAccount(Cybox):
 
   def account_last_login(self, _account_last_login):
     self.set_attribute('account_last_login', _account_last_login, str, 'timestamp')
+
+class WindowsRegistryKey(Cybox):
+  class WindowsRegistryValue(Cybox):
+    def __init__(self, *args, **kwargs):
+      self.name(kwargs.get('name', None))
+      self.data(kwargs.get('data', None))
+      self.data_type(kwargs.get('data_type', None))
+
+    def name(self, _name):
+      self.set_attribute('name', _name, str, None, True)
+
+    def data(self, _data):
+      self.set_attribute('data', _data, str)
+
+    def data_type(self, _data_type):
+      self.set_attribute('data_type', _data_type, str, 'windows-registry-datatype-enum')
+
+  type = 'windows-registry-key'
+  def __init__(self, *args, **kwargs):
+    self.type = WindowsRegistryKey.type
+    super(WindowsRegistryKey, self).__init__(*args, **kwargs)
+    self.key(kwargs.get('key', None))
+    self.values(kwargs.get('values', None))
+    self.modified(kwargs.get('modified', None))
+    self.creator_user_ref(kwargs.get('creator_user_ref', None))
+    self.number_of_subkeys(kwargs.get('number_of_subkeys', None))
+
+  def key(self, _key):
+    self.set_attribute('key', _key, str, None, True)
+
+  def values(self, _values):
+    self.set_attribute('values', _values, list)
+
+  def modified(self, _modified):
+    self.set_attribute('modified', _modified, str, 'timestamp')
+
+  def creator_user_ref(self, _creator_user_ref):
+    self.set_attribute('creator_user_ref', _creator_user_ref, str, 'cybox-object-refs')
+
+  def number_of_subkeys(self, _number_of_subkeys):
+    self.set_attribute('number_of_subkeys', _number_of_subkeys, int)
+
+  def add_registry_value(self, name, data=None, data_type=None):
+    reg_value = WindowsRegistryKey.WindowsRegistryValue(name=name, data=data, data_type=data_type)
+    if type(getattr(self, 'values', None)) is list:
+      self.values.append(reg_value.__dict__)
+    else:
+      self.values([reg_value.__dict__])
 
 class Container(object):
   def __init__(self, *args, **kwargs):

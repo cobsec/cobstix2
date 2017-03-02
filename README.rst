@@ -6,8 +6,8 @@ An experimental python library implementing the STIX 2.0 spec as python objects 
 :Spec: http://stixproject.github.io/stix2.0/
 
 File list:
- - cobstix2: Core stix2 implementation
- - cobbox: Core cybox2 implementation
+ - cobstix2: Core stix2 implementation (very work in progress!)
+ - cobbox: Core cybox2 implementation (even more work in progress while I figure out how the referenced containers can be built)
  - common_tools: Shared functions for manipulating stix objects
  - vocab: Set vocabs for use in stix object construction (mostly open-vocab)
  - stixelk: Some functions to interact with an elk stack to push stix2 objects to a knowledge base

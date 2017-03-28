@@ -77,7 +77,8 @@ class SDO(object):
     self.set_attribute('created', _created, str, 'timestamp', True)
 
   def modified(self, _modified):
-    self.set_attribute('modified', _modified, str, 'timestamp', True)
+    if self.type != 'marking-definition':
+      self.set_attribute('modified', _modified, str, None, True)
 
   def id(self, _id):
     self.set_attribute('id', _id, str, 'id', True)
@@ -87,7 +88,7 @@ class SDO(object):
 
   def name(self, _name):
     required = True
-    if self.type == 'relationship':
+    if self.type == 'relationship' or self.type == 'marking-definition':
       required = False
     self.set_attribute('name', _name, str, None, required)
 

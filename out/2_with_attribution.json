@@ -1,0 +1,600 @@
+{
+    "id": "bundle--08996095-4356-4f91-adb6-f4fd643070e1",
+    "objects": [
+        {
+            "created": "2017-03-15T11:59:28.268000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--6d4e58fc-d502-45c7-9ddc-7705f4d63805",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:28.268000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = '617BA99BE8A7D0771628344D209E9D8A']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:28.268000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.195000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--60aa052f-468f-48c1-a7c4-c019fbb8f296",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.195000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[url:value = 'efax.pfdregistry.net/eFax/37486.ZIP']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.195000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.196000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--571932b6-2b46-422f-ac85-8584a44bea6f",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.196000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'private.directinvesting.com']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.196000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.198000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--19f294da-1df4-4327-994c-a509cad410ae",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.198000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'www.cderlearn.com']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.198000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.199000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--6e08aaa0-7fde-4cc0-8599-49139c83b38f",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.199000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'ritsoperrol.ru']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.199000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.200000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--2b1d6ef8-5e6c-49a9-8a4d-7260c6167883",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.200000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'littjohnwilhap.ru']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.200000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.202000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--d1d09598-3991-4961-9c14-2d6406944861",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.202000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'wilcarobbe.com']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.202000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.204000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--78132328-4a12-48e6-8ace-2c69d94da929",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.204000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'one2shoppee.com']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.204000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.205000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--c633aa91-304c-4eca-aedc-f5625d55cf8c",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.205000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'insta.reduct.ru']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.205000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.207000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--a8268f89-4d21-4708-bb0e-4540d656d703",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.207000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'editprod.waterfilter.in.ua']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.207000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.208000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--60ab3902-c806-4335-8db5-34a23fe3a905",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.208000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'mymodule.waterfilter.in.ua']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.208000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.209000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--8baff9ca-1eee-4052-bae1-1807e1191ff9",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.209000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'efax.pfdregistry.net']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.209000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.211000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--f6b0e860-117d-41c6-8201-45cda741d283",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.211000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[ipv4-addr:value = '167.114.35.70']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.211000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.212000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--0ad63ac3-275e-4c6e-93e4-3bfda30faca7",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.212000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[ipv4-addr:value = '185.12.46.178']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.212000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.213000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--0d091f41-d494-4cc7-9564-3ab7dc24748f",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.213000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[ipv4-addr:value = '46.102.152.132']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.213000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:25.483000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--23f711db-9ac8-455d-8f30-f48509a4d8d0",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:25.483000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = '8F154D23AC2071D7F179959AABA37AD5']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:25.483000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:26.461000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--56501210-b415-4a4d-b20f-8173412bc1db",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:26.461000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = 'AE7E3E531494B201FBF6021066DDD188']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:26.461000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:26.776000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--02afbc13-ad6a-44ce-8657-5216e2732180",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:26.776000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = '7FCE89D5E3D59D8E849D55D604B70A6F']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:26.776000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:27.109000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--f0e85a3b-5efd-4195-926a-0b6cd84f827d",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:27.109000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = '81F1AF277010CB78755F08DFCC379CA6']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:27.109000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.189000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Cyber-enabled operations alleged by US Government to originate from Russian activity against US Political targets",
+            "first_seen": "2015-06-01T00:00:00Z",
+            "id": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "modified": "2017-03-15T11:59:24.189000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "type": "campaign"
+        },
+        {
+            "created": "2017-03-15T11:59:24.189000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Russian civilian and military intelligence Services (RIS)",
+            "id": "threat-actor--31a32c1f-83af-4f67-a8a7-7f91d612e0d0",
+            "labels": [
+                "nation-state"
+            ],
+            "modified": "2017-03-15T11:59:24.189000Z",
+            "name": "RIS",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "type": "threat-actor"
+        },
+        {
+            "created": "2017-03-15T11:59:24.190000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "id": "intrusion-set--01c85acf-1c22-45b9-a1cb-77e1fdbfecef",
+            "modified": "2017-03-15T11:59:24.190000Z",
+            "name": "APT28",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "type": "intrusion-set"
+        },
+        {
+            "created": "2017-03-15T11:59:24.191000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "id": "intrusion-set--242a6a51-e475-4455-ad97-225783d3dedf",
+            "modified": "2017-03-15T11:59:24.191000Z",
+            "name": "APT29",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "type": "intrusion-set"
+        },
+        {
+            "created": "2017-03-15T11:59:24.191000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--055ee5c7-34a7-4e8e-bd37-5cb72e2f00c0",
+            "modified": "2017-03-15T11:59:24.191000Z",
+            "relationship_type": "attributed-to",
+            "source_ref": "intrusion-set--01c85acf-1c22-45b9-a1cb-77e1fdbfecef",
+            "target_ref": "threat-actor--31a32c1f-83af-4f67-a8a7-7f91d612e0d0",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.192000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--e99cf801-bcc7-4dd1-8671-f85d322c8acb",
+            "modified": "2017-03-15T11:59:24.192000Z",
+            "relationship_type": "attributed-to",
+            "source_ref": "intrusion-set--242a6a51-e475-4455-ad97-225783d3dedf",
+            "target_ref": "threat-actor--31a32c1f-83af-4f67-a8a7-7f91d612e0d0",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.193000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--fc696295-12d6-4a03-a348-bbe5d11fa53a",
+            "modified": "2017-03-15T11:59:24.193000Z",
+            "relationship_type": "attributed-to",
+            "source_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "target_ref": "intrusion-set--01c85acf-1c22-45b9-a1cb-77e1fdbfecef",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.193000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--361cb1cb-4de2-42c1-b457-af9f8d723d6a",
+            "modified": "2017-03-15T11:59:24.193000Z",
+            "relationship_type": "attributed-to",
+            "source_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "target_ref": "intrusion-set--242a6a51-e475-4455-ad97-225783d3dedf",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.196000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--5668f1fb-38ac-4aa3-a0ff-f2ff6ee251a6",
+            "modified": "2017-03-15T11:59:24.196000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--60aa052f-468f-48c1-a7c4-c019fbb8f296",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.197000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--84b398bd-1ed5-43b1-868b-86867f9679b0",
+            "modified": "2017-03-15T11:59:24.197000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--571932b6-2b46-422f-ac85-8584a44bea6f",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.198000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--94bf62a3-3227-4c82-9f59-163231852213",
+            "modified": "2017-03-15T11:59:24.198000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--19f294da-1df4-4327-994c-a509cad410ae",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.200000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--8f3b37fd-3fb4-4410-afb3-2a3307c2afd8",
+            "modified": "2017-03-15T11:59:24.200000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--6e08aaa0-7fde-4cc0-8599-49139c83b38f",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.202000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--41137642-5333-4595-87e9-c2cf723481c2",
+            "modified": "2017-03-15T11:59:24.202000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--2b1d6ef8-5e6c-49a9-8a4d-7260c6167883",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.203000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--034e4136-f37a-4ec2-8e6b-23300b8aaf15",
+            "modified": "2017-03-15T11:59:24.203000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--d1d09598-3991-4961-9c14-2d6406944861",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.204000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--4601756d-0c39-47d9-b632-2d27f26375f3",
+            "modified": "2017-03-15T11:59:24.204000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--78132328-4a12-48e6-8ace-2c69d94da929",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.206000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--3dcca2b2-19e6-45fd-b276-df4203e0cd30",
+            "modified": "2017-03-15T11:59:24.206000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--c633aa91-304c-4eca-aedc-f5625d55cf8c",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.207000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--db43156a-8b09-4000-955c-46a57a5e751d",
+            "modified": "2017-03-15T11:59:24.207000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--a8268f89-4d21-4708-bb0e-4540d656d703",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.209000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--a5729c82-0af1-4d49-9cad-3be16b0174b3",
+            "modified": "2017-03-15T11:59:24.209000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--60ab3902-c806-4335-8db5-34a23fe3a905",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.210000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--aedbb342-18e5-4deb-abde-a757a769f2a1",
+            "modified": "2017-03-15T11:59:24.210000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--8baff9ca-1eee-4052-bae1-1807e1191ff9",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.211000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--1fb05558-97b6-445a-bc91-72ef323f82f3",
+            "modified": "2017-03-15T11:59:24.211000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--f6b0e860-117d-41c6-8201-45cda741d283",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.213000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--b7936391-ba21-46d9-84ed-07da1e0c725b",
+            "modified": "2017-03-15T11:59:24.213000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--0ad63ac3-275e-4c6e-93e4-3bfda30faca7",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:24.214000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--32d45fe6-2b50-4ecf-943e-4072648bd4e6",
+            "modified": "2017-03-15T11:59:24.214000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--0d091f41-d494-4cc7-9564-3ab7dc24748f",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:25.484000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--8650c379-68e6-4066-b30b-4d9a1364d749",
+            "modified": "2017-03-15T11:59:25.484000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--23f711db-9ac8-455d-8f30-f48509a4d8d0",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:26.462000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--9a9572c1-3164-4a75-843e-2896d8a48812",
+            "modified": "2017-03-15T11:59:26.462000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--56501210-b415-4a4d-b20f-8173412bc1db",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:26.777000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--1afdb2fc-e173-42cb-87a6-d51e633b4b66",
+            "modified": "2017-03-15T11:59:26.777000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--02afbc13-ad6a-44ce-8657-5216e2732180",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        },
+        {
+            "created": "2017-03-15T11:59:27.110000Z",
+            "created_by_ref": "identity--6149436c-4afa-3a9d-adc5-00847c096f1e",
+            "id": "relationship--b94f099a-d46d-4a34-8d5b-368acc1405c8",
+            "modified": "2017-03-15T11:59:27.110000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--f0e85a3b-5efd-4195-926a-0b6cd84f827d",
+            "target_ref": "campaign--6659241b-afd2-4b71-94a5-7d250218d637",
+            "type": "relationship"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

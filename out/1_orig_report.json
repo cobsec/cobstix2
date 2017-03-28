@@ -1,0 +1,330 @@
+{
+    "id": "bundle--a16dae25-fcb7-4d62-ad93-2eb37db0f567",
+    "objects": [
+        {
+            "created": "2017-03-15T11:59:28.268000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--6d4e58fc-d502-45c7-9ddc-7705f4d63805",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:28.268000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = '617BA99BE8A7D0771628344D209E9D8A']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:28.268000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.195000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--60aa052f-468f-48c1-a7c4-c019fbb8f296",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.195000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[url:value = 'efax.pfdregistry.net/eFax/37486.ZIP']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.195000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.196000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--571932b6-2b46-422f-ac85-8584a44bea6f",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.196000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'private.directinvesting.com']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.196000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.198000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--19f294da-1df4-4327-994c-a509cad410ae",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.198000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'www.cderlearn.com']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.198000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.199000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--6e08aaa0-7fde-4cc0-8599-49139c83b38f",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.199000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'ritsoperrol.ru']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.199000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.200000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--2b1d6ef8-5e6c-49a9-8a4d-7260c6167883",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.200000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'littjohnwilhap.ru']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.200000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.202000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--d1d09598-3991-4961-9c14-2d6406944861",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.202000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'wilcarobbe.com']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.202000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.204000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--78132328-4a12-48e6-8ace-2c69d94da929",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.204000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'one2shoppee.com']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.204000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.205000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--c633aa91-304c-4eca-aedc-f5625d55cf8c",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.205000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'insta.reduct.ru']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.205000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.207000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--a8268f89-4d21-4708-bb0e-4540d656d703",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.207000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'editprod.waterfilter.in.ua']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.207000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.208000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--60ab3902-c806-4335-8db5-34a23fe3a905",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.208000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'mymodule.waterfilter.in.ua']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.208000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.209000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--8baff9ca-1eee-4052-bae1-1807e1191ff9",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.209000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[domain-name:value = 'efax.pfdregistry.net']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.209000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.211000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--f6b0e860-117d-41c6-8201-45cda741d283",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.211000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[ipv4-addr:value = '167.114.35.70']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.211000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.212000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--0ad63ac3-275e-4c6e-93e4-3bfda30faca7",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.212000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[ipv4-addr:value = '185.12.46.178']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.212000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:24.213000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--0d091f41-d494-4cc7-9564-3ab7dc24748f",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:24.213000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[ipv4-addr:value = '46.102.152.132']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:24.213000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:25.483000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--23f711db-9ac8-455d-8f30-f48509a4d8d0",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:25.483000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = '8F154D23AC2071D7F179959AABA37AD5']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:25.483000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:26.461000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--56501210-b415-4a4d-b20f-8173412bc1db",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:26.461000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = 'AE7E3E531494B201FBF6021066DDD188']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:26.461000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:26.776000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--02afbc13-ad6a-44ce-8657-5216e2732180",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:26.776000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = '7FCE89D5E3D59D8E849D55D604B70A6F']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:26.776000Z"
+        },
+        {
+            "created": "2017-03-15T11:59:27.109000Z",
+            "created_by_ref": "identity--0e9001d9-671d-4ab2-9543-fb69038efd3f",
+            "description": "Suspected GRIZZLY STEPPE comms",
+            "id": "indicator--f0e85a3b-5efd-4195-926a-0b6cd84f827d",
+            "labels": [
+                "malicious-activity"
+            ],
+            "modified": "2017-03-15T11:59:27.109000Z",
+            "name": "GRIZZLY STEPPE",
+            "object_marking_refs": [
+                "marking-definition--353d6b56-7565-4340-9de4-8c6b4848b2ff"
+            ],
+            "pattern": "[file:hashes.MD5 = '81F1AF277010CB78755F08DFCC379CA6']",
+            "type": "indicator",
+            "valid_from": "2017-03-15T11:59:27.109000Z"
+        }
+    ],
+    "spec_version": "2.0",
+    "type": "bundle"
+}

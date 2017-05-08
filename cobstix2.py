@@ -230,10 +230,58 @@ class Malware(SDO):
   def __init__(self, *args, **kwargs):
     self.type = Malware.type
     super(Malware, self).__init__(*args, **kwargs)
+    self.is_family(kwargs.get('is_family', None))
     self.kill_chain_phases(kwargs.get('kill_chain_phases', None))
-  
+    self.first_seen(kwargs.get('first_seen', None))
+    self.last_seen(kwargs.get('last_seen', None))
+    self.certificates(kwargs.get('certificates', None))
+    self.strings(kwargs.get('strings', None))
+    self.code_snippets(kwargs.get('code_snippets', None))
+    self.network_traffic(kwargs.get('network_traffic', None))
+    self.actions(kwargs.get('actions', None))
+    self.sample_metadata(kwargs.get('sample_metadata', None))
+    self.sample(kwargs.get('sample', None))
+    self.extra_analysis_data(kwargs.get('extra_analysis_data', None))
+    self.classifications(kwargs.get('classifications', None))
+
+  def is_family(self, _is_family):
+    self.set_attribute('is_family', _is_family, bool)
+
   def kill_chain_phases(self, _kill_chain_phases):
     self.set_attribute('kill_chain_phases', _kill_chain_phases, list, 'killchain')
+
+  def first_seen(self, _first_seen):
+    self.set_attribute('first_seen', _first_seen, str, 'timestamp')
+
+  def last_seen(self, _last_seen):
+    self.set_attribute('last_seen', _last_seen, str, 'timestamp')
+
+  def certificates(self, _certificates):
+    self.set_attribute('certificates', _certificates, dict, None)
+
+  def strings(self, _strings):
+    self.set_attribute('strings', _strings, list, None)
+
+  def code_snippets(self, _code_snippets):
+    self.set_attribute('code_snippets', _code_snippets, dict, None)
+
+  def network_traffic(self, _network_traffic):
+    self.set_attribute('network_traffic', _network_traffic, dict, None)
+
+  def actions(self, _actions):
+    self.set_attribute('actions', _actions, list, None)
+
+  def sample_metadata(self, _sample_metadata):
+    self.set_attribute('sample_metadata', _sample_metadata, dict, None)
+
+  def sample(self, _sample):
+    self.set_attribute('sample', _sample, dict, None)
+
+  def extra_analysis_data(self, _extra_analysis_data):
+    self.set_attribute('extra_analysis_data', _extra_analysis_data, dict, None)
+
+  def classifications(self, _classifications):
+    self.set_attribute('classifications', _classifications, list, None)
 
 class ObservedData(SDO):
   type = 'observed-data'

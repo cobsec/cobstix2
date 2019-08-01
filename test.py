@@ -17,6 +17,7 @@ def main():
   print win_key
   win_key.add_registry_value('value_name', '42', 'REG_QWORD')
   print win_key
+  print win_key
  
 
 
